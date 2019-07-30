@@ -20,19 +20,20 @@ const PortfolioItem = ({ portfolio }) => {
             </h3>
             <table className="table table-bordered">
                 <tbody>
-                    <tr key="name">
-                        <td className="text-right">name</td>
-                        <td>{portfolio.startDate}</td>
-                    </tr>
-                    <tr key='date'>
-                        <td className="text-right">date</td>
-                    <td>{portfolio.date}</td>
-                </tr>
+                    {Object.keys(portfolio).map(key => {
+                        if (key !== '_id') {
+                            return (<tr key={key}>
+                        <td className="text-right">{key}</td>
+                        <td>{portfolio[key]}</td>
+                    </tr>)
+                        }
+                    })}
                 </tbody>
             </table>
                 <div className="container text-center mx-auto">
                     <button onClick={() => setCurrentPortfolio(portfolio)} className="btn btn-dark  btn-block">Edit</button>
                     <button onClick={onDelete} className="btn btn-danger btn-block">Delete</button>
+                    <Link onClick={() => setCurrentPortfolio(portfolio)} to={'/portfolios'} className="btn btn-primary btn-block">Info</Link>
                 </div>
             </div>
         </div>

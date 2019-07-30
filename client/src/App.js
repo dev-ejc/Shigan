@@ -32,8 +32,9 @@ const App = () => {
                 <div className="container">
                   <Alert />
                   <Switch>
-                    {/* <PrivateRoute exact path="/Stock/:id" component={Stock} />
-                      <PrivateRoute exact path="/News" component={News} /> */}
+                    {/* 
+                     <PrivateRoute exact path="/Stock/:id" component={Stock} />
+                    <PrivateRoute exact path="/News" component={News} /> */}
                     <PrivateRoute exact path="/" component={User} />
                     {/* <PrivateRoute exact path="/Portfolio/:id" component={Portfolio} />
                       <PrivateRoute exact path="/Research" component={Research} /> */}
@@ -47,7 +48,7 @@ const App = () => {
             </Router>
           </AlertState>
         </StockState>
-      </PortfolioState>
+        </PortfolioState>
     </AuthState>
   );
 };

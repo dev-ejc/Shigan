@@ -35,6 +35,7 @@ const PortfolioState = props => {
     try {
       setLoading();
       const res = await axios.get("/api/portfolios", config);
+      console.log(res.data);
       dispatch({
         type: GET_PORTFOLIOS,
         payload: res.data
@@ -84,7 +85,7 @@ const PortfolioState = props => {
   };
 
   //Update CURRENT_PORTFOLIO
-  const updateCurrentPortfolio = async Portfolio => {
+  const updateCurrentPortfolio = async portfolio => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const config = {
@@ -94,8 +95,8 @@ const PortfolioState = props => {
     try {
       setLoading();
       const res = await axios.put(
-        `api/portfolios/${Portfolio._id}`,
-        Portfolio,
+        `api/portfolios/${portfolio._id}`,
+        portfolio,
         config
       );
       dispatch({
@@ -175,7 +176,7 @@ const PortfolioState = props => {
         clearFilter
       }}
     >
-      {props.childpen}
+      {props.children}
     </PortfolioContext.Provider>
   );
 };

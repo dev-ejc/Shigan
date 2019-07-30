@@ -14,21 +14,19 @@ const Portfolios = () => {
         getPortfolios()
     }, //eslint-disable-next-line
     [])
-
     if (filtered !== null) {
         data = filtered
     }
-
     return (
         <div className='container'>
-            {Portfolios !== null && !loading ? (
+            { portfolios !== null && !loading ? (
                  <TransitionGroup>
-                 {data.map(Portfolio => (
-                 <CSSTransition key={Portfolio._id} timeout={500} className="item">
-                     <PortfolioItem Portfolio={Portfolio} />
+                 {data.map(portfolio => (
+                 <CSSTransition key={portfolio._id} timeout={500} className="item">
+                     <PortfolioItem portfolio={portfolio} />
                  </CSSTransition>))}
              </TransitionGroup>
-            ) : <div class="spinner-border" role="status">
+            ) : <div class="spinner-border text-center" role="status">
             <span class="sr-only">Loading...</span>
            </div>}      
         </div>

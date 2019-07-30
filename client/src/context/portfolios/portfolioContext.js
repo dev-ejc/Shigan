@@ -1,5 +1,5 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
-const portfolioContext = createContext()
+const portfolioContext = createContext();
 
-export default portfolioContext
+export default portfolioContext;

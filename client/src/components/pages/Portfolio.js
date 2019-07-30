@@ -14,14 +14,14 @@ const Portfolio = () => {
     [])
     return (
         <div className="container mt-2">
-            <div className="col">
+            {/* <div className="col">
                 <div className="row">
                     <Visuals />
                 </div>
                 <div className="row">
                     <News />
                 </div>
-            </div>
+            </div> */}
             <div className="col">
                 <div className="row">
                     <StockFilter />
