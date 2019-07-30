@@ -1,5 +1,5 @@
 {
-  "name": "contact-keeper",
+  "name": "Sapling",
   "version": "1.0.0",
   "description": "Contact Application",
   "main": "server.js",
@@ -12,20 +12,20 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "0.19.0",
     "bcryptjs": "2.4.3",
     "config": "3.2.0",
-    "connect-flash": "^0.1.1",
+    "connect-flash": "0.1.1",
     "express": "4.17.1",
-    "express-session": "^1.16.2",
+    "express-session": "1.16.2",
     "express-validator": "6.1.1",
     "jsonwebtoken": "8.5.1",
     "mongoose": "5.6.4",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport": "0.4.0",
+    "passport-local": "1.0.0"
   },
   "devDependencies": {
     "concurrently": "4.1.1",
-    "http-proxy-middleware": "^0.19.1"
+    "http-proxy-middleware": "0.19.1"
   }
 }

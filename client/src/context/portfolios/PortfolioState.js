@@ -168,6 +168,7 @@ const PortfolioState = props => {
         deletePortfolio,
         updateCurrentPortfolio,
         clearCurrentPortfolio,
+        getPortfolios,
         clearPortfolios,
         setCurrentPortfolio,
         clearCurrentPortfolio,

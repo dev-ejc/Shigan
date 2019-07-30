@@ -46,7 +46,7 @@ const PortfolioForm = () => {
         clearCurrentPortfolio()
     }
 
-    const { name, date } = portfolio
+    const { name } = portfolio
 
     return (
             <div className="container border mt-1">

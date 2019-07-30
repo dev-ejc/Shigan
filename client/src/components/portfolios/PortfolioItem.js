@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 const PortfolioItem = ({ portfolio }) => {
     const portfolioContext = useContext(PortfolioContext)
-    const { deletePortfolio, setCurrentPortfolio, clearCurrentPortfolio } = PortfolioContext
+    const { deletePortfolio, setCurrentPortfolio, clearCurrentPortfolio } = portfolioContext
     const { _id, name } = portfolio
 
     const onDelete = () => {
