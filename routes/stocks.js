@@ -10,7 +10,6 @@ const auth = require('../middleware/auth')
 // @TODO    abstract route framework
 router.get('/:id', auth, async (req,res) => {
     try {
-        console.log('Hit stock request route')
         const stocks = await Stock.find({portfolio: req.params.id}).sort({date:-1})
         res.json(stocks)
     } catch (err) {
@@ -33,7 +32,6 @@ router.post('/:id',[auth, [
     }
     const { ticker,shares,purchaseDate} = req.body
     try {
-        console.log(req.params.id)
         const newStock = new Stock({
             portfolio:req.params.id, ticker, shares, purchaseDate
         })
@@ -49,22 +47,23 @@ router.post('/:id',[auth, [
 // @desc    Update portfolio stocks
 // @access  Private
 router.put('/:id',auth, async (req,res) => {
-    const { ticker,shares } = req.body  
+    console.log('Update route hit')
+    const { ticker,shares, portfolio } = req.body  
     const stockFields = {}
     if(ticker) stockFields.ticker = ticker
     if(shares) stockFields.shares = shares  
     try {
-       
         let stock = await Stock.findById(req.params.id)
         if(!stock) {
             return res.status(404).json({ msg:"Stock does not exist"})
         }
-        if(stock.portfolio.toString() !== req.portfolio.id) {
-            return res.status(401).json({ msg:"Not authorized"})
-        }
+        // if(stock.portfolio.id.toString() !== portfolio) {
+        //     return res.status(401).json({ msg:"Not authorized"})
+        // }
         stock = await Stock.findByIdAndUpdate(req.params.id,
             { $set: stockFields}, 
             { new: true })
+        console.log(stock)
         res.json(stock)
     } catch (err) {
         console.error(err.message)

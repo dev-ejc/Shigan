@@ -8,12 +8,12 @@ const StockFilter = () => {
 
     useEffect(() => {
         if(filtered === null) {
-            text.CURRENT_STOCK.value = ''
+            text.current.value = ''
         }
     })
 
     const onChange = e => {
-        if(text.CURRENT_STOCK.value !== '') {
+        if(text.current.value !== '') {
             filterStocks(e.target.value)
         } else {
             clearFilter()

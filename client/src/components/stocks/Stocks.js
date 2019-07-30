@@ -1,17 +1,19 @@
 import React , { useContext, useEffect }from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import StockContext from '../../context/stocks/stockContext'
+import PortfolioContext from '../../context/portfolios/portfolioContext'
 import StockItem from './StockItem'
 
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all stock items
 const Stocks = () => {
     const stockContext = useContext(StockContext)
+    const portfolioContext = useContext(PortfolioContext)
     const { stocks, loading, filtered, getStocks} = stockContext
     let data = stocks
 
     useEffect(() => {
-        getStocks()
+        getStocks(portfolioContext.current._id)
     }, //eslint-disable-next-line
     [])
 

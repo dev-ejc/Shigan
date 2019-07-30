@@ -46,7 +46,7 @@ const StockState = props => {
   };
 
   // Add Stock
-  const addStock = async stock => {
+  const addStock = async (stock, id) => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const config = {
@@ -89,12 +89,11 @@ const StockState = props => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const config = {
-      headers: {
-        "Content-Type": "application/json"
-      },
+        "Content-Type": "application/json",
       signal
     };
     try {
+      console.log(stock);
       setLoading();
       const res = await axios.put(`api/stocks/${stock._id}`, stock, config);
       dispatch({

@@ -50,7 +50,6 @@ router.put('/:id',auth, async (req,res) => {
     const portfolioFields = {}
     if(name) portfolioFields.name = name  
     try {
-       
         let portfolio = await Portfolio.findById(req.params.id)
         if(!portfolio) {
             return res.status(404).json({ msg:"Portfolio does not exist"})
@@ -63,7 +62,6 @@ router.put('/:id',auth, async (req,res) => {
             { new: true })
         res.json(portfolio)
     } catch (err) {
-       
         console.error(err.message)
         res.status(500).send('Server Error')
     }

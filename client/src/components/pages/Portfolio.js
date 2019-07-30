@@ -1,17 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
 import StockFilter from '../stocks/StockFilter'
-import AuthContext from '../../context/auth/authContext'
 
 const Portfolio = () => {
-    const authContext = useContext(AuthContext)
-    const { loadUser } = authContext
-
-    useEffect(() => {
-        loadUser()
-    }, //eslint-disable-next-line
-    [])
     return (
         <div className="container mt-2">
             {/* <div className="col">

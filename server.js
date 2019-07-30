@@ -60,6 +60,6 @@ var server = app.listen(app.get('port'), () => {
         await disconnectDB()
         server.close(() => {
         console.log("Server Shutdown")
-    })},60000)
+    })},240000)
 })
 

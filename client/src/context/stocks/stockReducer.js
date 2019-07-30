@@ -32,7 +32,7 @@ export default (state,action) => {
         case SET_CURRENT_STOCK: {
             return {
                 ...state,
-                CURRENT_STOCK:action.payload,
+                current:action.payload,
                 loading:false
             }
         }
@@ -40,7 +40,7 @@ export default (state,action) => {
         case UPDATE_CURRENT_STOCK: {
             return {
                 ...state,
-                stocks: state.stocks.map(stock => stock._id === action.payload._id ? action.payload : stock),
+                current: state.stocks.map(stock => stock._id === action.payload._id ? action.payload : stock),
                 loading:false
             }
         }
@@ -51,7 +51,7 @@ export default (state,action) => {
                 stocks:null,
                 filtered:null,
                 error:null,
-                CURRENT_STOCK:null,
+                current:null,
                 loading:false
             }
         }
@@ -59,7 +59,7 @@ export default (state,action) => {
         case CLEAR_CURRENT_STOCK: {
             return {
                 ...state,
-                CURRENT_STOCK:null,
+                current:null,
                 loading:false
             }
         }

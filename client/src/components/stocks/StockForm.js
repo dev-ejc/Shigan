@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import StockContext from '../../context/stocks/stockContext'
+import PortfolioContext from '../../context/portfolios/portfolioContext'
 
 const StockForm = () => {
     const stockContext = useContext(StockContext)
-    const { addStock,updateCurrentStock, clearCurrentStock,  current } = stockContext
+    const portfolioContext = useContext(PortfolioContext)
+    const { addStock, updateCurrentStock, clearCurrentStock,  current } = stockContext
     const [stock, setStock] =  useState({
         ticker:'',
         shares:0,
@@ -31,10 +33,12 @@ const StockForm = () => {
     const onSubmit = e => {
         e.preventDefault()
         if(current) {
-            updateCurrentStock(current)
+            console.log(current)
+            console.log(stock)
+            updateCurrentStock(stock)
             clearCurrentStock()
         } else {
-            addStock(stock)
+            addStock(stock, portfolioContext.current._id)
             setStock(
                 {
                     ticker:'',
@@ -54,7 +58,7 @@ const StockForm = () => {
     return (
             <div className="container border mt-1">
             <form className="form p-2" onSubmit={onSubmit}>
-                <h2 className='form-title'>{CURRENT_STOCK ? 'Update Stock' : 'Add Stock'}</h2>
+                <h2 className='form-title'>{current ? 'Update Stock' : 'Add Stock'}</h2>
                 <div className="form-group">
                     <label htmlFor="ticker">Ticker</label>                
                     <input className="form-control" 

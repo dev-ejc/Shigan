@@ -6,7 +6,7 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import About from "./components/pages/About";
 import User from "./components/pages/User";
 // import Stock from './components/pages/Stock'
-// import Portfolio from './components/pages/Portfolio'
+import Portfolio from './components/pages/Portfolio'
 // import News from './components/pages/News'
 import NotFound from "./components/pages/NotFound";
 import Register from "./components/auth/Register";
@@ -36,8 +36,8 @@ const App = () => {
                      <PrivateRoute exact path="/Stock/:id" component={Stock} />
                     <PrivateRoute exact path="/News" component={News} /> */}
                     <PrivateRoute exact path="/" component={User} />
-                    {/* <PrivateRoute exact path="/Portfolio/:id" component={Portfolio} />
-                      <PrivateRoute exact path="/Research" component={Research} /> */}
+                     <PrivateRoute exact path="/Portfolio" component={Portfolio} />
+                     {/* <PrivateRoute exact path="/Research" component={Research} /> */}
                     <Route exact path="/About" component={About} />
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/Login" component={Login} />

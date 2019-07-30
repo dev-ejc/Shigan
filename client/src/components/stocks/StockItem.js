@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 
 const StockItem = ({ stock }) => {
     const stockContext = useContext(StockContext)
-    const { deleteStock, setCURRENT_STOCK, clearCURRENT_STOCK } = stockContext
+    const { deleteStock, setCurrentStock, clearCurrentStock } = stockContext
     const { _id, ticker } = stock
 
     const onDelete = () => {
         deleteStock(_id)
-        clearCURRENT_STOCK()
+        clearCurrentStock()
     }
 
     return (
@@ -20,18 +20,15 @@ const StockItem = ({ stock }) => {
             </h3>
             <table className="table table-bordered">
                 <tbody>
-                    <tr key="ticker">
-                        <td className="text-right">TICKER</td>
-                        <td>{stock.ticker}</td>
-                    </tr>
-                    <tr key='shares'>
-                        <td className="text-right">SHARES</td>
-                    <td>{stock.shares}</td>
-                </tr>
+                    {Object.keys(stock).map(key => {
+                    return (<tr key={key}>
+                        <td className="text-right">{key}</td>
+                        <td>{stock[key]}</td>
+                    </tr>)})}
                 </tbody>
             </table>
                 <div className="container text-center mx-auto">
-                    <button onClick={() => setCURRENT_STOCK(stock)} className="btn btn-dark  btn-block">Edit</button>
+                    <button onClick={() => setCurrentStock(stock)} className="btn btn-dark  btn-block">Edit</button>
                     <button onClick={onDelete} className="btn btn-danger btn-block">Delete</button>
                 </div>
             </div>
