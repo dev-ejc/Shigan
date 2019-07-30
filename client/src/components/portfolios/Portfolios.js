@@ -7,7 +7,7 @@ import PortfolioItem from './PortfolioItem'
 //@TODO improve scope of loading to all Portfolio items
 const Portfolios = () => {
     const portfolioContext = useContext(PortfolioContext)
-    const { portfolios, loading, filtered, getPortfolios} = PortfolioContext
+    const { portfolios, loading, filtered, getPortfolios} = portfolioContext
     let data = portfolios
 
     useEffect(() => {

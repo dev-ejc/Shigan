@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Portfolios from "../portfolios/Portfolios";
 import PortfolioForm from "../portfolios/PortfolioForm";
-import PortfolioFilter from "../portfolios/PortfolioFilter";
+// import PortfolioFilter from "../portfolios/PortfolioFilter";
 import AuthContext from "../../context/auth/authContext";
 //import UserCard from "../../auth/UserCard";
 //import News from "../../news/News";
@@ -25,9 +25,9 @@ const User = () => {
         <div className="row">
           <PortfolioForm />
         </div>
-        <div className="row">
+        {/* <div className="row">
           <PortfolioFilter />
-        </div>
+        </div> */}
         <div className="row">
           <Portfolios />
         </div>

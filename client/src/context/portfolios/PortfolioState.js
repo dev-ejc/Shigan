@@ -46,7 +46,7 @@ const PortfolioState = props => {
   };
 
   // Add Portfolio
-  const addPortfolio = async Portfolio => {
+  const addPortfolio = async portfolio => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     const config = {
@@ -57,7 +57,7 @@ const PortfolioState = props => {
     };
     try {
       setLoading();
-      const res = await axios.post("/api/portfolios", Portfolio, config);
+      const res = await axios.post("/api/portfolios", portfolio, config);
       dispatch({
         type: ADD_PORTFOLIO,
         payload: res.data
@@ -171,7 +171,6 @@ const PortfolioState = props => {
         getPortfolios,
         clearPortfolios,
         setCurrentPortfolio,
-        clearCurrentPortfolio,
         filterPortfolios,
         clearFilter
       }}
