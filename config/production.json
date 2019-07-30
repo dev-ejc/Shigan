@@ -1,4 +1,0 @@
-{
-    "mongoURI":"mongodb+srv://admin:wMDbWbtmJSa3M2yZ@shopping-list-lc41i.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret":"investigate"
-}
