@@ -3,19 +3,33 @@ const router = express.Router()
 const Stock = require('../models/Stock')
 const { check, validationResult } = require('express-validator')
 const auth = require('../middleware/auth')
+const axios = require('axios')
 
 // @route   GET api/stocks
 // @desc    GET all portfolio stocks
 // @access  Private
 // @TODO    abstract route framework
-router.get('/:id', auth, async (req,res) => {
-    try {
-        const stocks = await Stock.find({portfolio: req.params.id}).sort({date:-1})
-        res.json(stocks)
-    } catch (err) {
-        console.error(err.message)
-        res.status(500).send('Server Error')
-    } 
+router.get('/:id', auth, (req,res) => {
+        Stock
+        .find({portfolio: req.params.id})
+        .sort({date:-1})
+        .then(stocks => {
+            stocks.map(stock => {
+                axios.get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`).then(res => {
+                    console.log(stock)
+                    console.log(res.data.profile)
+                    return { stock, profile: res.data.profile }
+                })
+            })
+        })
+        .then(payload => {
+            console.log(payload)
+            res.json(payload)
+        })
+        .catch(err => {
+            console.error(err.message)
+            res.status(500).send('Server Error')
+        })
 })
 
 // @route   POST api/stocks

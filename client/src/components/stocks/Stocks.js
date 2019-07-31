@@ -1,5 +1,4 @@
 import React , { useContext, useEffect }from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import StockContext from '../../context/stocks/stockContext'
 import PortfolioContext from '../../context/portfolios/portfolioContext'
 import StockItem from './StockItem'
@@ -24,12 +23,9 @@ const Stocks = () => {
     return (
         <div className='container'>
             {stocks !== null && !loading ? (
-                 <TransitionGroup>
-                 {data.map(stock => (
-                 <CSSTransition key={stock._id} timeout={500} className="item">
-                     <StockItem stock={stock} />
-                 </CSSTransition>))}
-             </TransitionGroup>
+                 data.map(stock => (
+                     <StockItem key={stock._id} stock={stock} />
+                     ))
             ) : <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
            </div>}      

@@ -1,4 +1,4 @@
-import { GET_NEWS, SET_LOADING, NEWS_ERROR } from '../types'
+import { GET_NEWS, SET_LOADING, NEWS_ERROR, SET_CURRENT_NEW } from '../types'
 
 const initialState = {
     news:null,
@@ -10,6 +10,11 @@ const initialState = {
 
 export default (state = initialState,action) => {
     switch(action.type) {
+        case SET_KEYWORD:
+            return {
+                ...state,
+                keyword:action.payload,
+            }
         case GET_NEWS:
             return {
                 ...state,

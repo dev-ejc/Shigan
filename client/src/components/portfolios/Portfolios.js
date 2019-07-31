@@ -1,5 +1,4 @@
 import React , { useContext, useEffect }from 'react'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import PortfolioContext from '../../context/portfolios/portfolioContext'
 import PortfolioItem from './PortfolioItem'
 
@@ -20,13 +19,9 @@ const Portfolios = () => {
     return (
         <div className='container'>
             { portfolios !== null && !loading ? (
-                 <TransitionGroup>
-                 {data.map(portfolio => (
-                 <CSSTransition key={portfolio._id} timeout={500} className="item">
-                     <PortfolioItem portfolio={portfolio} />
-                 </CSSTransition>))}
-             </TransitionGroup>
-            ) : <div class="spinner-border text-center" role="status">
+                 data.map(portfolio => (
+                     <PortfolioItem key={portfolio._id}  portfolio={portfolio}/>)
+            )) : <div class="spinner-border text-center" role="status">
             <span class="sr-only">Loading...</span>
            </div>}      
         </div>

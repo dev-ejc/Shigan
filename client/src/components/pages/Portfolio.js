@@ -6,26 +6,21 @@ import StockFilter from '../stocks/StockFilter'
 const Portfolio = () => {
     return (
         <div className="container mt-2">
-            {/* <div className="col">
-                <div className="row">
-                    <Visuals />
-                </div>
-                <div className="row">
-                    <News />
-                </div>
-            </div> */}
-            <div className="col">
-                <div className="row">
-                    <StockFilter />
-                </div>
-                <div className="row">
-                    <StockForm />
-                </div>
-                <div className="row">
-                    <Stocks />
-                </div>
-            </div>
+        <div className="row">
+      {/* <div className="row">
+            <UserCard />
+          </div> */}
+          <div className="col">
+            <StockForm />
+            <StockFilter />
+            <Stocks />
+          </div>
+          <div className='col'>
+            <Visuals />
+            <News />
+          </div>
         </div>
+      </div>
     )
 }
 

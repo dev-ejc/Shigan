@@ -19,19 +19,17 @@ const User = () => {
   return (
     <div className="container mt-2">
       <div className="row">
-        {/* <div className="row">
+    {/* <div className="row">
           <UserCard />
         </div> */}
         <div className="col">
           <PortfolioForm />
+          <PortfolioFilter />
           <Portfolios />
         </div>
         <div className='col'>
           <News />
         </div>
-        {/* <div className="row">
-          <PortfolioFilter />
-        </div> */}
       </div>
     </div>
   );
