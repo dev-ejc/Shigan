@@ -4,7 +4,7 @@ import PortfolioForm from "../portfolios/PortfolioForm";
 // import PortfolioFilter from "../portfolios/PortfolioFilter";
 import AuthContext from "../../context/auth/authContext";
 //import UserCard from "../../auth/UserCard";
-//import News from "../../news/News";
+import News from "../news/News";
 
 const User = () => {
   const authContext = useContext(AuthContext);
@@ -18,25 +18,21 @@ const User = () => {
   );
   return (
     <div className="container mt-2">
-      <div className="col">
+      <div className="row">
         {/* <div className="row">
           <UserCard />
         </div> */}
-        <div className="row">
+        <div className="col">
           <PortfolioForm />
+          <Portfolios />
+        </div>
+        <div className='col'>
+          <News />
         </div>
         {/* <div className="row">
           <PortfolioFilter />
         </div> */}
-        <div className="row">
-          <Portfolios />
-        </div>
       </div>
-      {/* <div className='col'>
-          <div className="row">
-              <News />
-          </div>
-      </div> */}
     </div>
   );
 };

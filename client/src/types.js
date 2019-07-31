@@ -1,0 +1,8 @@
+export const GET_NEWS = 'GET_NEWS'
+export const CLEAR_NEWS = 'CLEAR_NEWS'
+export const SET_CURRENT_NEW = 'SET_CURRENT_NEW'
+export const NEWS_ERROR = 'NEW_ERROR'
+export const CLEAR_CURRENT_NEW = 'CLEAR_CURRENT_NEW'
+export const FILTER_NEWS = 'FILTER_NEWS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+export const SET_LOADING = 'SET_LOADING'

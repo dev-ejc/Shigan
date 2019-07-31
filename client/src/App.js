@@ -16,12 +16,14 @@ import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alerts/AlertState";
 import PortfolioState from "./context/portfolios/PortfolioState";
 import Alert from "./components/layouts/Alert";
-
+import { Provider } from 'react-redux'
+import store from './store'
 //@TODO Implement News Functions
 //@TODO Implement AlphaVantage api
 //@TODO Implement News-Api
 const App = () => {
   return (
+    <Provider store={store}>
     <AuthState>
       <PortfolioState>
         <StockState>
@@ -50,6 +52,7 @@ const App = () => {
         </StockState>
         </PortfolioState>
     </AuthState>
+    </Provider>
   );
 };
 

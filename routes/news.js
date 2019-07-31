@@ -18,7 +18,25 @@ router.get('/:name', (req,res) => {
         "params" : {
             "country":"us",
             "category":"business",
-            "q": req.params.ticker,
+            "q": "water",
+            "page":1
+        } 
+    }
+        axios.get('https://newsapi.org/v2/everything', headers).then(news => res.send(news.data.articles)).catch(err => {
+            console.error(err.message)
+            res.status(500).send('Server Error')
+        })
+})
+
+router.get('/', (req,res) => {
+    console.log('Headline route hit')
+    const headers = {
+        "headers" : {
+        "X-Api-Key" : key
+        },
+        "params" : {
+            "country":"us",
+            "category":"business",
             "page":1
         } 
     }
@@ -27,5 +45,4 @@ router.get('/:name', (req,res) => {
             res.status(500).send('Server Error')
         })
 })
-
 module.exports =  router
