@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
 const { connectDB, disconnectDB } = require('./config/db')
-const path = require('path')
+// const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
 const flash = require('connect-flash')
@@ -28,21 +28,6 @@ app.use(passport.session());
 // Connect Flash
 app.use(flash());
 
-//Adding Routes
-app.use("/api/users",require('./routes/users'))
-app.use("/api/auth",require('./routes/auth'))
-app.use("/api/stocks",require('./routes/stocks'))
-app.use("/api/news",require('./routes/news'))
-app.use("/api/fundamentals",require('./routes/fundamentals'))
-app.use("/api/prices",require('./routes/prices'))
-app.use("/api/portfolios",require('./routes/portfolios'))
-
-// Serve static assets in production
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
-    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
-}
-
 // Global vars
 app.use((req,res,next) => {
     res.locals.success_msg = req.flash('success-_msg')
@@ -62,4 +47,19 @@ var server = app.listen(app.get('port'), () => {
         console.log("Server Shutdown")
     })},240000)
 })
+
+//Adding Routes
+app.use("/api/users",require('./routes/users'))
+app.use("/api/auth",require('./routes/auth'))
+app.use("/api/stocks",require('./routes/stocks'))
+app.use("/api/news",require('./routes/news'))
+app.use("/api/fundamentals",require('./routes/fundamentals'))
+app.use("/api/prices",require('./routes/prices'))
+app.use("/api/portfolios",require('./routes/portfolios'))
+
+// Serve static assets in production
+// if(process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'))
+//     app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
+// }
 
