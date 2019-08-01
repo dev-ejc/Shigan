@@ -17,8 +17,8 @@ router.get('/:keyword', (req,res) => {
     console.log('Price Route Hit')
     const headers = {
             params: {
-        "function":"SYMBOL_SEARCH",
-        "keywords": req.params.keyword,
+        "function":"GLOBAL_QUOTE",
+        "symbol": req.params.keyword,
         "apikey":key
             }
     }
@@ -29,7 +29,6 @@ router.get('/:keyword', (req,res) => {
                 res.status(500).send('Server Error')
             })
         }
-        
 )
 
 module.exports = router

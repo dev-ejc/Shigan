@@ -15,10 +15,10 @@ const Portfolio = () => {
             <StockFilter />
             <Stocks />
           </div>
-          <div className='col'>
+          {/* <div className='col'>
             <Visuals />
             <News />
-          </div>
+          </div> */}
         </div>
       </div>
     )

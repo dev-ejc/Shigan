@@ -1,4 +1,4 @@
-import { GET_NEWS, SET_LOADING, NEWS_ERROR } from '../types'
+import { GET_NEWS, SET_LOADING, NEWS_ERROR } from './types'
 import axios from 'axios'
 
 export const getNews = () => dispatch => {

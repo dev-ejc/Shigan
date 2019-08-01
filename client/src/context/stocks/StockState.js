@@ -14,7 +14,7 @@ import {
   FILTER_STOCKS,
   CLEAR_FILTER,
   STOCK_ERROR
-} from "../types.js";
+} from "../types";
 
 const StockState = props => {
   const initialState = {

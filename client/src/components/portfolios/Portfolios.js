@@ -1,7 +1,6 @@
 import React , { useContext, useEffect }from 'react'
 import PortfolioContext from '../../context/portfolios/portfolioContext'
 import PortfolioItem from './PortfolioItem'
-
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all Portfolio items
 const Portfolios = () => {

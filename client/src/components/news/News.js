@@ -3,7 +3,7 @@ import React , { useEffect, useContext }from 'react'
 import NewsItem from './NewsItem'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getNews, getNewsTopic } from '../../actions/newsActions'
+import { getNews } from '../../state/news/newsActions'
 
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all stock items
