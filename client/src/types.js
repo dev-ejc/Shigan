@@ -1,6 +1,7 @@
 export const GET_NEWS = 'GET_NEWS'
 export const CLEAR_NEWS = 'CLEAR_NEWS'
 export const SET_CURRENT_NEW = 'SET_CURRENT_NEW'
+export const SET_KEYWORD = 'SET_KEYWORD'
 export const NEWS_ERROR = 'NEW_ERROR'
 export const CLEAR_CURRENT_NEW = 'CLEAR_CURRENT_NEW'
 export const FILTER_NEWS = 'FILTER_NEWS'
