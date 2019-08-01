@@ -3,7 +3,6 @@ const router = express.Router()
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const config = require('config')
-const { connectDB, disconnectDB } = require('../config/db')
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 
@@ -24,10 +23,9 @@ async (req,res) => {
     const { name, email, password } = req.body
 
     try {
-        //await connectDB()
+
         let user = await User.findOne({ email })
         if(user) {
-            // await disconnectDB()
             return res.status(400).json({msg:"User already exists"})
         }
         const salt = await bcrypt.genSalt(10)
@@ -36,7 +34,6 @@ async (req,res) => {
             name,email,password: hashed_pw
         })
         await user.save()
-        // await disconnectDB()
         const payload = {
             user: {
                 id: user.id
@@ -50,7 +47,6 @@ async (req,res) => {
         })
     } catch (err) {
         console.error(err.message)
-        // await disconnectDB()
         res.status(500).send('Server Error')
     }
 })

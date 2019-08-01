@@ -22,7 +22,7 @@ router.get('/:name', (req,res) => {
     }
         axios.get('https://newsapi.org/v2/everything?', headers).then(news => res.send(news.data.articles)).catch(err => {
             console.error(err.message)
-            res.status(500).send('Server Error')
+           res.status(500).send('Server Error')
         })
 })
 
@@ -36,7 +36,7 @@ router.get('/', (req,res) => {
             "page":1
         } 
     }
-        axios.get('https://newsapi.org/v2/top-headlines', headers).then(news => res.send(news.data.articles)).catch(err => {
+        axios.get('https://newsapi.org/v2/top-headlines/', headers).then(news => res.send(news.data.articles)).catch(err => {
             console.error(err.message)
             res.status(500).send('Server Error')
         })
