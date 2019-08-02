@@ -11,7 +11,9 @@ const axios = require('axios')
 // @access  Private
 // @TODO    abstract route framework
 router.get('/:ticker', (req,res) => {
-    axios.get(`https://financialmodelingprep.com/api/v3/company-key-metrics/${req.params.ticker}`).then(metrics => res.send(metrics.data)).catch(err => {
+    axios.get(`https://financialmodelingprep.com/api/v3/company-key-metrics/${req.params.ticker}`)
+    .then(metrics => res.send(metrics.data))
+    .catch(err => {
         console.error(err.message)
         res.status(500).send('Server Error')
     })

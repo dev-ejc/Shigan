@@ -1,13 +1,13 @@
-import { GET_PRICE, SET_LOADING, PRICE_ERROR } from './types'
+import { GET_PRICES, SET_LOADING, PRICE_ERROR } from './types'
 import axios from 'axios'
 
-export const getPrice = (ticker) => dispatch => {
+//@TODO possible breakpoint
+export const getPrices = id => dispatch => {
     setLoading()
-    axios.get(`api/prices/${ticker}`).then(res => {
-        console.log(res.data)
+    axios.get(`api/prices/${id}`).then(res => {
         dispatch({
-            type: GET_PRICE,
-            payload: res.data["Global Quote"]
+            type: GET_PRICES,
+            payload: res.data
         })
     }).catch(err => {
         dispatch({

@@ -2,7 +2,7 @@ import React from 'react'
 import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
 import StockFilter from '../stocks/StockFilter'
-
+import News from '../news/News'
 const Portfolio = () => {
     return (
         <div className="container mt-2">
@@ -15,10 +15,10 @@ const Portfolio = () => {
             <StockFilter />
             <Stocks />
           </div>
-          {/* <div className='col'>
-            <Visuals />
+          <div className='col'>
+            {/* <Visuals /> */}
             <News />
-          </div> */}
+          </div>
         </div>
       </div>
     )

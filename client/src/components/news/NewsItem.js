@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const NewsItem = ({ news }) => {
-    const { title, urlToImage, publishedAt, author} = news
+    const { title, urlToImage, publishedAt, author, source} = news
     return (
         <div className="card bg-secondary mt-1">
             <div className="card-body">
@@ -10,6 +10,9 @@ const NewsItem = ({ news }) => {
             <h3 className="card-title text-dark text-left">
                 {title}
             </h3>
+            <h7 className="card-title text-dark text-left">
+                {source.name}
+            </h7>
             <h7 className="card-title text-dark text-left">
                 {author}
             </h7>

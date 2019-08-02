@@ -1,20 +1,21 @@
-import { GET_PRICE, SET_LOADING, PRICE_ERROR } from './types'
+import { GET_PRICES, SET_LOADING, PRICE_ERROR } from './types'
 
 const initialState = {
-    price: null,
+    prices: null,
     loading:false,
     error:null
 }
 
 export default (state = initialState,action) => {
     switch(action.type) {
-        case GET_PRICE:
+        case GET_PRICES:
             //Possible breakpoint
             return {
                 ...state,
-                price: action.payload,
+                prices: action.payload,
                 loading: false
             }
+            
         case SET_LOADING:
             return {
                 ...state,
