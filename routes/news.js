@@ -11,16 +11,18 @@ const auth = require('../middleware/auth')
 // @access  Private
 // @TODO    abstract route framework
 router.get('/:name', (req,res) => {
-    const headers = {
-        "X-Api-Key" : key,
+    const configs = {
+        headers: {
+        "x-api-key" : key
+        },
         "params" : {
             "country":"us",
             "category":"business",
-            //"q": encodeURIComponent(req.params.name),
+            "q":req.params.name,
             "page":1
         } 
     }
-        axios.get('https://newsapi.org/v2/everything?', headers).then(news => res.send(news.data.articles)).catch(err => {
+        axios.get('https://newsapi.org/v2/everything', configs).then(news => res.send(news.data.articles)).catch(err => {
             console.error(err.message)
            res.status(500).send('Server Error')
         })
@@ -28,15 +30,18 @@ router.get('/:name', (req,res) => {
 
 router.get('/', (req,res) => {
     console.log('Headline route hit')
-    const headers = {
-        "X-Api-Key" : key,
+    const configs = {
+        headers: {
+        "x-api-key" : key
+        },
         "params" : {
             "country":"us",
             "category":"business",
             "page":1
         } 
     }
-        axios.get('https://newsapi.org/v2/top-headlines/', headers).then(news => res.send(news.data.articles)).catch(err => {
+        axios.get('https://newsapi.org/v2/top-headlines/', configs)
+        .then(news => res.send(news.data.articles)).catch(err => {
             console.error(err.message)
             res.status(500).send('Server Error')
         })

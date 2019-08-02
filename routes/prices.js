@@ -15,7 +15,7 @@ const key = config.get('alphaKey')
 // @TODO    What happend to AbortControllers
 router.get('/:keyword', (req,res) => {
     console.log('Price Route Hit')
-    const headers = {
+    const configs = {
             params: {
         "function":"GLOBAL_QUOTE",
         "symbol": req.params.keyword,
@@ -23,7 +23,7 @@ router.get('/:keyword', (req,res) => {
             }
     }
     console.log('Called AlphaVantage')
-        axios.get("https://www.alphavantage.co/query", headers).then( 
+        axios.get("https://www.alphavantage.co/query", configs).then( 
             price => res.send(price.data)).catch(err => {
                 console.error(err.message)
                 res.status(500).send('Server Error')
