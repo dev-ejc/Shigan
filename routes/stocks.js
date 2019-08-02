@@ -14,13 +14,6 @@ router.get('/:id', auth, async (req,res) => {
         const stocks = await Stock
         .find({portfolio: req.params.id})
         .sort({date:-1})
-        // if(stocks.length > 0) {
-        //     const result = []
-        //     await stocks.forEach(async stock => {
-        //         const res = await axios.get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
-        //         console.log(res.data.profile)
-        //         result.push(res.data.profile)
-        //     })
         res.send(stocks)
     } catch (err) {
         console.error(err.message)

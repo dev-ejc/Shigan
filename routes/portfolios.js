@@ -59,9 +59,9 @@ router.put("/:id", auth, async (req, res) => {
     if (!portfolio) {
       return res.status(404).json({ msg: "Portfolio does not exist" });
     }
-    if (portfolio.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "Not authorized" });
-    }
+    // if (portfolio.user.toString() !== req.user.id) {
+    //   return res.status(401).json({ msg: "Not authorized" });
+    // }
     portfolio = await Portfolio.findByIdAndUpdate(
       req.params.id,
       { $set: portfolioFields },

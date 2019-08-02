@@ -13,22 +13,32 @@ const key = config.get('alphaKey')
 // @access  Private
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
-router.get('/:keyword', (req,res) => {
-    console.log('Price Route Hit')
-    const configs = {
-            params: {
-        "function":"GLOBAL_QUOTE",
-        "symbol": req.params.keyword,
-        "apikey":key
-            }
+router.get('/:id',auth, async (req,res) => {
+    console.log('Hit Stocks Route')
+    try  {
+    let stocks = await Stock
+    .find({portfolio: req.params.id})
+    .sort({date:-1})
+    // var result = []
+    console.log(stocks)
+    stocks.map(stock => {
+        console.log(stock.ticker)
+        stock.ticker
+    //     const configs = {
+    //         params: {
+    //     "function":"GLOBAL_QUOTE",
+    //     "symbol": stock.ticker,
+    //     "apikey":key
+    //         }
+    //     }
+    //     axios.get("https://www.alphavantage.co/query", configs).data
+    })
+    console.log(stocks)
+    res.send('Hi')
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Error')
     }
-    console.log('Called AlphaVantage')
-        axios.get("https://www.alphavantage.co/query", configs).then( 
-            price => res.send(price.data)).catch(err => {
-                console.error(err.message)
-                res.status(500).send('Server Error')
-            })
-        }
-)
+})
 
 module.exports = router
