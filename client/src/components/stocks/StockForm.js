@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
 import StockContext from '../../context/stocks/stockContext'
 import PortfolioContext from '../../context/portfolios/portfolioContext'
+import { addPrice } from '../../state/prices/pricesActions';
+import { connect } from 'react-redux';
 
-const StockForm = () => {
+const StockForm = ({prices,addPrice}) => {
     const stockContext = useContext(StockContext)
     const portfolioContext = useContext(PortfolioContext)
     const { addStock, updateCurrentStock, clearCurrentStock,  current } = stockContext
@@ -39,6 +41,7 @@ const StockForm = () => {
             clearCurrentStock()
         } else {
             addStock(stock, portfolioContext.current._id)
+            addPrice(stock.ticker)
             setStock(
                 {
                     ticker:'',
@@ -84,4 +87,8 @@ const StockForm = () => {
     )
 }
 
-export default StockForm
+const mapStateToProps = state => ({
+    prices:state.prices
+});
+
+export default connect(mapStateToProps,{addPrice})(StockForm)

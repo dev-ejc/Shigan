@@ -8,15 +8,15 @@ import PropTypes from 'prop-types'
 
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all stock items
-const Stocks = ({prices}) => {
+const Stocks = ({prices:{prices}, getPrices}) => {
     const stockContext = useContext(StockContext)
     const portfolioContext = useContext(PortfolioContext)
     const { stocks, loading, filtered, getStocks} = stockContext
     let data = stocks
 
     useEffect(() => {
-        getStocks(portfolioContext.current._id)
         getPrices(portfolioContext.current._id)
+        getStocks(portfolioContext.current._id)
     }, //eslint-disable-next-line
     [])
 
@@ -24,9 +24,10 @@ const Stocks = ({prices}) => {
         data = filtered
     }
 
+    //@TODO Gotta improve tracking loading states
     return (
         <div className='container'>
-            {stocks !== null && !loading && !prices.loading ? (
+            {stocks !== null && !loading &&  prices !== null ? (
                  data.map(stock => (
                      <StockItem key={stock._id} price={prices[stock.ticker]} stock={stock} />
                      ))

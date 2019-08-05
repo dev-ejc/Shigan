@@ -48,6 +48,7 @@ const key = config.get("alphaKey");
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
 router.get("/:id", auth, async (req, res) => {
+  console.log('Price route hit')
   try {
     const stocks = await Stock.find({ portfolio: req.params.id }).sort({
       date: -1
@@ -64,14 +65,43 @@ router.get("/:id", auth, async (req, res) => {
           "https://www.alphavantage.co/query",
           configs
         ).then(price => {
-          let data = {
-            price: price.data["Global Quote"],
-            stock
-          }
-          return data
+          return data = price.data["Global Quote"]
         });
     });
-    Promise.all(promises).then(result => res.send(result))
+    Promise.all(promises).then(result => {
+      let payload = {}
+      result.forEach(price => {
+        payload[price["01. symbol"]] = price
+      })
+      res.send(payload)
+    })
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/stocks
+// @desc    GET all user stocks
+// @access  Private
+// @TODO    abstract route framework
+// @TODO    What happend to AbortControllers
+router.get("/ticker/:ticker", auth, async (req, res) => {
+  console.log('Ticker Price route hit')
+  try {
+        const configs = {
+          params: {
+            function: "GLOBAL_QUOTE",
+            symbol: req.params.ticker,
+            apikey: key
+          }
+        };
+        return axios.get(
+          "https://www.alphavantage.co/query",
+          configs
+        ).then(price => {
+          res.send(price.data["Global Quote"])
+        });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

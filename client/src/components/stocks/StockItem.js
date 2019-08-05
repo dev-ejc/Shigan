@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import StockContext from '../../context/stocks/stockContext'
+import PropTypes from 'prop-types'
 
 const StockItem = ({ price, stock }) => {
     const stockContext = useContext(StockContext)
     const { deleteStock, setCurrentStock, clearCurrentStock } = stockContext
-    const { _id, ticker } = stock
+    const { _id, ticker, shares } = stock
 
     const onDelete = () => {
         deleteStock(_id)
@@ -19,11 +20,15 @@ const StockItem = ({ price, stock }) => {
             </h3>
             <table className="table table-bordered">
                 <tbody>
-                    {Object.keys(stock).map(key => {
+                    {Object.keys(price).map(key => {
                     return (<tr key={key}>
                         <td className="text-right">{key}</td>
-                        <td>{stock[key]}</td>
+                        <td>{price[key]}</td>
                     </tr>)})}
+                    <tr key={"shares"}>
+                        <td className="text-right">Shares</td>
+                        <td>{shares}</td>
+                    </tr>
                 </tbody>
             </table>
                 <div className="container text-center mx-auto">
@@ -35,4 +40,8 @@ const StockItem = ({ price, stock }) => {
     )       
 }
 
+StockItem.prototype = {
+    price: PropTypes.object.isRequired,
+    stock: PropTypes.object.isRequired
+}
 export default StockItem
