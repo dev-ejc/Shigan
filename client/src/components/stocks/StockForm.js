@@ -1,13 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react'
-import StockContext from '../../context/stocks/stockContext'
-import PortfolioContext from '../../context/portfolios/portfolioContext'
+import React, { useState, useEffect } from 'react'
 import { addPrice } from '../../state/prices/pricesActions';
-import { connect } from 'react-redux';
+import { addStock,updateCurrentStock,clearCurrentStock } from '../../state/stocks/stocksAction'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const StockForm = ({prices,addPrice}) => {
-    const stockContext = useContext(StockContext)
-    const portfolioContext = useContext(PortfolioContext)
-    const { addStock, updateCurrentStock, clearCurrentStock,  current } = stockContext
+const StockForm = ({portfolios,stocks:{current},prices,addPrice, addStock,updateCurrentStock,clearCurrentStock}) => {
+
     const [stock, setStock] =  useState({
         ticker:'',
         shares:0,
@@ -27,7 +25,7 @@ const StockForm = ({prices,addPrice}) => {
                 }
             )
         }
-    },[stockContext,current])
+    },[current])
 
     const onChange = e => setStock({...stock,
             [e.target.name]:e.target.value})
@@ -40,7 +38,7 @@ const StockForm = ({prices,addPrice}) => {
             updateCurrentStock(stock)
             clearCurrentStock()
         } else {
-            addStock(stock, portfolioContext.current._id)
+            addStock(stock, portfolios.current._id)
             addPrice(stock.ticker)
             setStock(
                 {
@@ -87,8 +85,14 @@ const StockForm = ({prices,addPrice}) => {
     )
 }
 
+StockForm.prototype = {
+    prices: PropTypes.object.isRequired,
+    stocks: PropTypes.object.isRequired
+}
 const mapStateToProps = state => ({
-    prices:state.prices
+    prices:state.prices,
+    stocks: state.stocks,
+    portfolios: state.portfolios
 });
 
-export default connect(mapStateToProps,{addPrice})(StockForm)
+export default connect(mapStateToProps,{addPrice,addStock,updateCurrentStock,clearCurrentStock})(StockForm)
