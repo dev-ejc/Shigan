@@ -1,22 +1,19 @@
-import React , { useContext, useEffect }from 'react'
-import StockContext from '../../context/stocks/stockContext'
-import PortfolioContext from '../../context/portfolios/portfolioContext'
+import React , { useEffect }from 'react'
 import StockItem from './StockItem'
 import { getPrices } from '../../state/prices/pricesActions'
+import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all stock items
-const Stocks = ({prices:{prices}, getPrices}) => {
-    const stockContext = useContext(StockContext)
-    const portfolioContext = useContext(PortfolioContext)
-    const { stocks, loading, filtered, getStocks} = stockContext
+const Stocks = ({portfolios:{current},prices:{prices}, getPrices, stocks:{stocks,loading,filtered}, getStocks}) => {
+    
     let data = stocks
 
     useEffect(() => {
-        getPrices(portfolioContext.current._id)
-        getStocks(portfolioContext.current._id)
+        getPrices(current._id)
+        getStocks(current._id)
     }, //eslint-disable-next-line
     [])
 
@@ -43,7 +40,9 @@ Stocks.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    prices:state.prices
+    prices:state.prices,
+    stocks:state.stocks,
+    portfolios:state.portfolios
 });
 
-export default connect(mapStateToProps, {getPrices})(Stocks)
+export default connect(mapStateToProps, {getPrices,getStocks})(Stocks)

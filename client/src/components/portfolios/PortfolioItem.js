@@ -1,13 +1,11 @@
-import React, { useContext } from 'react'
-import PortfolioContext from '../../context/portfolios/portfolioContext'
+import React from 'react'
+import { setCurrentPortfolio, clearCurrentPortfolio, deletePortfolio } from '../../state/portfolios/portfolioActions'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const PortfolioItem = ({ portfolio }) => {
-    const portfolioContext = useContext(PortfolioContext)
-    const { deletePortfolio, setCurrentPortfolio, clearCurrentPortfolio } = portfolioContext
+const PortfolioItem = ({ portfolio, deletePortfolio,setCurrentPortfolio,clearCurrentPortfolio }) => {
     const { _id, name } = portfolio
-
     const onDelete = () => {
         deletePortfolio(_id)
         clearCurrentPortfolio()
@@ -42,7 +40,12 @@ const PortfolioItem = ({ portfolio }) => {
 }
 
 PortfolioItem.propTypes = {
-    portfolio : PropTypes.object.isRequired
+    portfolio : PropTypes.object.isRequired,
+    portoflios: PropTypes.object.isRequired,
 }
 
-export default PortfolioItem
+const mapStateToProps = state => ({
+
+});
+
+export default connect(mapStateToProps, {setCurrentPortfolio, clearCurrentPortfolio, deletePortfolio})(PortfolioItem)

@@ -30,7 +30,7 @@ const Portfolios = ({portfolios: {portfolios,loading,filtered}, getPortfolios}) 
     )
 }
 
-PortfolioItem.propTypes = {
+Portfolios.propTypes = {
     portfolios: PropTypes.array.isRequired
 }
 

@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react'
-import PortfolioContext from '../../context/portfolios/portfolioContext'
+import React, { useState, useEffect } from 'react'
+import { addPortfolio, updateCurrentPortfolio, clearCurrentPortfolio } from '../../state/portfolios/portfolioActions'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-const PortfolioForm = () => {
-    const portfolioContext = useContext(PortfolioContext)
-    const { addPortfolio,updateCurrentPortfolio, clearCurrentPortfolio, current } = portfolioContext
+const PortfolioForm = ({portfolios:{current}, addPortfolio,updateCurrentPortfolio,clearCurrentPortfolio}) => {
 
     const [portfolio, setPortfolio] =  useState({
         name:'',
@@ -21,7 +21,7 @@ const PortfolioForm = () => {
                 }
             )
         }
-    },[portfolioContext,current])
+    },[current])
 
     const onChange = e => setPortfolio({...portfolio,
             [e.target.name]:e.target.value})
@@ -68,4 +68,12 @@ const PortfolioForm = () => {
     )
 }
 
-export default PortfolioForm
+PortfolioForm.propTypes = {
+    portfolios: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    portfolios:state.portfolios
+});
+
+export default connect(mapStateToProps, {addPortfolio, updateCurrentPortfolio, clearCurrentPortfolio})(PortfolioForm)

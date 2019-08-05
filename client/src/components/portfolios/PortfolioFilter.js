@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useEffect } from 'react'
-import PortfolioContext from '../../context/portfolios/portfolioContext'
+import React, { useRef, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { clearFilter, filterPortfolios } from '../../state/portfolios/portfolioActions'
+import PropTypes from 'prop-types'
 
-const PortfolioFilter = () => {
-    const portfolioContext = useContext(PortfolioContext)
-    const { filterPortfolios, clearFilter, filtered} = portfolioContext
+const PortfolioFilter = ({portfolios:{filtered}, filterPortfolios,clearFilter}) => {
     const text = useRef('')
 
     useEffect(() => {
@@ -29,4 +29,13 @@ const PortfolioFilter = () => {
     )
 }
 
-export default PortfolioFilter
+
+PortfolioFilter.propTypes = {
+    portfolios: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    portfolios:state.portfolios
+});
+
+export default connect(mapStateToProps, {clearFilter, filterPortfolios})(PortfolioFilter)
