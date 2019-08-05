@@ -69,11 +69,7 @@ router.get("/:id", auth, async (req, res) => {
         });
     });
     Promise.all(promises).then(result => {
-      let payload = {}
-      result.forEach(price => {
-        payload[price["01. symbol"]] = price
-      })
-      res.send(payload)
+      res.send(result)
     })
   } catch (err) {
     console.error(err.message);
