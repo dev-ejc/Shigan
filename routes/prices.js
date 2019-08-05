@@ -12,35 +12,70 @@ const key = config.get("alphaKey");
 // @access  Private
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
-router.get("/:id", auth, (req, res) => {
-  let result = {};
-  console.log("Hit Stocks Route");
-    Stock.find({ portfolio: req.params.id }).sort({
+// router.get("/:id", auth, (req, res) => {
+//   let result = {}
+//   console.log("Hit Stocks Route");
+//     Stock.find({ portfolio: req.params.id }).sort({
+//       date: -1
+//     })
+//     .then(async stocks => {
+//         console.log(stocks)
+//         await stocks
+//         .forEach(stock => {
+//           const configs = {
+//             params: {
+//               function: "GLOBAL_QUOTE",
+//               symbol: stock.ticker,
+//               apikey: key
+//             }
+//           }
+//         axios.get("https://www.alphavantage.co/query", configs)
+//         .then(price => {
+//           console.log(price.data)
+//           result[stock.ticker] = price.data
+//           })
+//         })
+//       })
+//       .then(() =>  res.send(result))
+//       .catch(err => {
+//         console.error(err.message);
+//         res.status(500).send("Server Error");
+//       })});
+
+// @route   GET api/stocks
+// @desc    GET all user stocks
+// @access  Private
+// @TODO    abstract route framework
+// @TODO    What happend to AbortControllers
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const stocks = await Stock.find({ portfolio: req.params.id }).sort({
       date: -1
-    })
-    .then(async stocks => {
-        console.log('Beginning of av requests')
-        await stocks
-        .forEach(stock => {
-          const configs = {
-            params: {
-              function: "GLOBAL_QUOTE",
-              symbol: req.params.ticker,
-              apikey: key
-            }
+    });
+    let promises = stocks.map(stock => {
+        const configs = {
+          params: {
+            function: "GLOBAL_QUOTE",
+            symbol: stock.ticker,
+            apikey: key
           }
-        axios.get("https://www.alphavantage.co/query", configs)
-        .then(price => {
-          console.log(price.data["Global Quote"])
-          result[req.params.ticker] = price.data["Global Quote"]
-          })        
-        })
-        return result
-      })
-      .then(result => res.send(result))
-      .catch(err => {
-        console.error(err.message);
-        res.status(500).send("Server Error");
-      })});
+        };
+        return axios.get(
+          "https://www.alphavantage.co/query",
+          configs
+        ).then(price => {
+          let data = {
+            price: price.data["Global Quote"],
+            stock
+          }
+          return data
+        });
+    });
+    Promise.all(promises).then(result => res.send(result))
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;
