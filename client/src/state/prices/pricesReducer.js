@@ -9,18 +9,15 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_PRICES:
-      //Possible breakpoint
       return {
         ...state,
         prices: action.payload,
         loading: false
       };
     case ADD_PRICE:
-      //Possible breakpoint
-      console.log(...state);
       return {
         ...state,
-        prices: { ...state.prices, [action.ticker]: action.payload },
+        prices: [...state.prices,  action.payload],
         loading: false
       };
 

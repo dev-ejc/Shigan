@@ -1,4 +1,4 @@
-import { GET_PRICES, SET_LOADING, PRICE_ERROR, ADD_PRICE } from './types'
+import { GET_PRICES, SET_LOADING, PRICE_ERROR, ADD_PRICE, REMOVE_PRICE } from './types'
 import axios from 'axios'
 
 //@TODO possible breakpoint
@@ -43,8 +43,7 @@ export const addPrice = ticker => dispatch => {
         console.log(res.data)
         dispatch({
             type: ADD_PRICE,
-            payload: res.data,
-            ticker
+            payload: res.data
         })
         abortController.abort();
     }).catch(err => {

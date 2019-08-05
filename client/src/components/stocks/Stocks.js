@@ -24,9 +24,9 @@ const Stocks = ({portfolios:{current},prices:{prices}, getPrices, stocks:{stocks
     //@TODO Gotta improve tracking loading states
     return (
         <div className='container'>
-            {stocks !== null && !loading &&  prices !== null ? (
-                 data.map(stock => (
-                     <StockItem key={stock._id} price={prices[stock.ticker]} stock={stock} />
+            {stocks !== null && !loading && prices !== null ? (
+                 data.map((stock,index) => (
+                     <StockItem key={stock._id} price={prices[index]} stock={stock} />
                      ))
             ) : <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
