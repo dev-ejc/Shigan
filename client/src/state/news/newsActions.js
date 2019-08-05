@@ -17,26 +17,9 @@ export const getNews = () => dispatch => {
     })
 }
 
-//@TODO reformat get requests to utilize params header
-export const getNewsTopic = (topic) => dispatch => {
-    setLoading()
-    axios.get(`api/news:${topic}`).then(res => {
-        console.log(res.data)
-        dispatch({
-            type: GET_NEWS,
-            payload: res.data
-        })
-    }).catch(err => {
-        dispatch({
-            type:NEWS_ERROR,
-            payload: err
-        })
-    })
-}
-
-// Set loading to true
-export const setLoading = () => {
-    return {
-        type: SET_LOADING
-    }    
-}
+  // Set Loading
+  export const setLoading = () => async dispatch => {
+    dispatch({
+      type: SET_LOADING
+    });
+  };

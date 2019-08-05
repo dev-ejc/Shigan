@@ -1,5 +1,4 @@
-import React , { useEffect, useContext }from 'react'
-
+import React , { useEffect }from 'react'
 import NewsItem from './NewsItem'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'

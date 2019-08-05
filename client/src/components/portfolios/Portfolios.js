@@ -1,20 +1,23 @@
-import React , { useContext, useEffect }from 'react'
-import PortfolioContext from '../../context/portfolios/portfolioContext'
+import React , {  useEffect }from 'react'
 import PortfolioItem from './PortfolioItem'
+import { getPortfolios } from '../../state/portfolios/portfolioActions'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all Portfolio items
-const Portfolios = () => {
-    const portfolioContext = useContext(PortfolioContext)
-    const { portfolios, loading, filtered, getPortfolios} = portfolioContext
-    let data = portfolios
+const Portfolios = ({portfolios: {portfolios,loading,filtered}, getPortfolios}) => {
 
+    let data = portfolios
     useEffect(() => {
         getPortfolios()
     }, //eslint-disable-next-line
     [])
+
     if (filtered !== null) {
         data = filtered
     }
+
     return (
         <div className='container'>
             { portfolios !== null && !loading ? (
@@ -27,4 +30,12 @@ const Portfolios = () => {
     )
 }
 
-export default Portfolios
+PortfolioItem.propTypes = {
+    portfolios: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+    portfolios:state.portfolios
+});
+
+export default connect(mapStateToProps, {getPortfolios})(Portfolios)
