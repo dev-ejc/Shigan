@@ -2,7 +2,7 @@ import {SET_ALERT, REMOVE_ALERT} from './types'
 
 // Set Alert
 export const setAlert = (msg,type) => dispatch => {
-        const id = state.length + 1
+        const id = msg.length + type.length
         dispatch({
             type: SET_ALERT,
             payload: {

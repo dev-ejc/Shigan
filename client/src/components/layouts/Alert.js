@@ -17,8 +17,8 @@ Alert.prototypes ={
     alerts: PropTypes.object.isRequired,
 }
 
-mapStateToProps = {
+const mapStateToProps = state => ({
     alerts: state.alerts
-}
+})
 
 export default connect(mapStateToProps,{})(Alert)

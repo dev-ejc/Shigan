@@ -62,8 +62,8 @@ Login.propTypes = {
 }
 
 
-mapStateToProps = {
+const mapStateToProps = state => ({
     auths: state.auths
-}
+})
 
 export default connect(mapStateToProps, {setAlert,login,clearErrors})(Login)

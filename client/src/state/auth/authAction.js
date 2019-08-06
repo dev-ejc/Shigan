@@ -1,4 +1,5 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
+import setAuthToken from "../../utils/setAuthToken";
 import axios from 'axios'
 
 // Load User
@@ -48,7 +49,7 @@ export const register = formData => async dispatch => {
   }
 };
 // Login User
-const login = formData => async dispatch => {
+export const login = formData => async dispatch => {
 
   const config = {
     headers: {
@@ -74,13 +75,13 @@ const login = formData => async dispatch => {
 };
 
 // Logout
-export const logout = () =>
+export const logout = () => dispatch =>
   dispatch({
     type: LOGOUT
   });
   
 // Clear Errors
-export const clearErrors = () => {
+export const clearErrors = () => dispatch => {
   dispatch({
     type: CLEAR_ERRORS
   });

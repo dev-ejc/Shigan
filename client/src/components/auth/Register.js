@@ -75,8 +75,8 @@ Register.propTypes = {
     auths: PropTypes.object.isRequired,
 }
 
-mapStateToProps = {
+const mapStateToProps = state => ({
     auths: state.auths
-}
+})
 
 export default connect(mapStateToProps, {setAlert,register,clearErrors})(Register)

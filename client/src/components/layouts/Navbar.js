@@ -50,12 +50,14 @@ Navbar.propTypes = {
     auths: PropTypes.object.isRequired,
 }
 
-mapStateToProps = {
+const mapStateToProps = state => ({
     auths: state.auths
-}
+})
+
 Navbar.defaultProps = {
     title: 'Porting',
     icon: 'fas fa-anchor'
 }
+
 
 export default connect(mapStateToProps,{logout,clearStocks})(Navbar)
