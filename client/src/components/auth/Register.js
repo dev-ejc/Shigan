@@ -1,34 +1,31 @@
-import React, { useContext, useState, useEffect } from 'react'
-import AlertContext from '../../context/alerts/alertContext'
-import AuthContext from '../../context/auth/authContext'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { setAlert } from '../../state/alerts/alertsAction'
+import { register, clearErrors } from '../../state/auth/authAction'
+import PropTypes from 'prop-types'
 
-const Register = (props) => {
+const Register = ({history, auths: {error, isAuthenticated}, register,clearErrors, setAlert}) => {
     const [user,setUser] = useState({
         name:'',
         email:'',
         password:'',
         password2:''
     })
-    const alertContext = useContext(AlertContext)
-    const authContext = useContext(AuthContext)
-    const { register, error , clearErrors, isAuthenticated} = authContext
-    const { setAlert } = alertContext
     const { name,email,password,password2 } = user
-
     const onChange = e => {
         setUser({...user,[e.target.name]:e.target.value })
     }
 
     useEffect(() => {
         if (isAuthenticated) {
-            props.history.push('/')
+            history.push('/')
         }
         if(error) {
             setAlert(error, 'danger')
             clearErrors()
         }
     },// eslint-disable-next-line
-    [error, isAuthenticated, props.history])
+    [error, isAuthenticated, history])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -74,4 +71,12 @@ const Register = (props) => {
     )
 }
 
-export default Register
+Register.propTypes = {
+    auths: PropTypes.object.isRequired,
+}
+
+mapStateToProps = {
+    auths: state.auths
+}
+
+export default connect(mapStateToProps, {setAlert,register,clearErrors})(Register)

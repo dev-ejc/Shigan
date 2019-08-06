@@ -1,10 +1,7 @@
-import React , { useContext }from 'react'
-import AlertContext from '../../context/alerts/alertContext'
-
-const Alert = () => {
-
-    const alertContext = useContext(AlertContext)
-    const { alerts } = alertContext
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+const Alert = ({alerts}) => {
 
     return (
             alerts.length > 0 && alerts.map(alert => (
@@ -16,4 +13,12 @@ const Alert = () => {
     )
 }
 
-export default Alert
+Alert.prototypes ={
+    alerts: PropTypes.object.isRequired,
+}
+
+mapStateToProps = {
+    alerts: state.alerts
+}
+
+export default connect(mapStateToProps,{})(Alert)

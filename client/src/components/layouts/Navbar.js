@@ -1,15 +1,11 @@
 import React, { Fragment, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../context/auth/authContext'
-import StockContext from '../../context/stocks/stockContext'
+import { connect } from 'react-redux'
+import { logout } from '../../state/auth/authAction'
+import { clearStocks } from '../../state/stocks/stocksAction'
 
-const Navbar = ({ title,icon }) => {
-    const authContext = useContext(AuthContext)
-    const stockContext = useContext(StockContext)
-
-    const { isAuthenticated, logout } = authContext
-    const { clearStocks } = stockContext
+const Navbar = ({auths:{isAuthenticated},logout,clearStocks, title,icon }) => {
     const onLogout = () => {
         logout()
         clearStocks()
@@ -50,12 +46,16 @@ const Navbar = ({ title,icon }) => {
 
 Navbar.propTypes = {
     title: PropTypes.string.isRequired,
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    auths: PropTypes.object.isRequired,
 }
 
+mapStateToProps = {
+    auths: state.auths
+}
 Navbar.defaultProps = {
     title: 'Porting',
     icon: 'fas fa-anchor'
 }
 
-export default Navbar
+export default connect(mapStateToProps,{logout,clearStocks})(Navbar)
