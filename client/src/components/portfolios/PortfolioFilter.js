@@ -31,7 +31,7 @@ const PortfolioFilter = ({portfolios:{filtered}, filterPortfolios,clearFilter}) 
 
 
 PortfolioFilter.propTypes = {
-    portfolios: PropTypes.array.isRequired
+    portfolios: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
