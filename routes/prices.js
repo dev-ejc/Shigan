@@ -82,7 +82,7 @@ router.get("/:id", auth, async (req, res) => {
 // @access  Private
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
-router.get("/ticker/:ticker", auth, async (req, res) => {
+router.get("/:ticker", auth, async (req, res) => {
   console.log('Ticker Price route hit')
   try {
         const configs = {
@@ -97,6 +97,33 @@ router.get("/ticker/:ticker", auth, async (req, res) => {
           configs
         ).then(price => {
           res.send(price.data["Global Quote"])
+        });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/stocks
+// @desc    GET all user stocks
+// @access  Private
+// @TODO    abstract route framework
+// @TODO    What happend to AbortControllers
+router.get("/search/:keyword", auth, async (req, res) => {
+  console.log('Search route hit')
+  try {
+        const configs = {
+          params: {
+            function: "SYMBOL_SEARCH",
+            keywords: req.params.keyword,
+            apikey: key
+          }
+        };
+        return axios.get(
+          "https://www.alphavantage.co/query",
+          configs
+        ).then(price => {
+          res.send(price.data.bestMatches)
         });
   } catch (err) {
     console.error(err.message);
