@@ -36,7 +36,7 @@ const StockItem = ({
               <td>{shares}</td>
             </tr>
             {Object.keys(price).map(key => {
-              if (key === "05. price" || "07. latest trading day" || "10. change percent") { 
+              if (key !== "05. price" || "07. latest trading day" || "10. change percent") { 
               return (
                 <tr key={key}>
                   <td className="text-right">{key}</td>
