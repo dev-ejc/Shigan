@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 
 const StockItem = ({
+  price,
   stock,
   deleteStock,
   setCurrentStock,
@@ -19,10 +20,8 @@ const StockItem = ({
   deletePrice
 }) => {
   const { _id, ticker, shares } = stock;
-
   const onDelete = () => {
     deleteStock(_id);
-    deletePrice()
     clearCurrentStock();
   };
 
@@ -36,8 +35,20 @@ const StockItem = ({
               <td className="text-right">Shares</td>
               <td>{shares}</td>
             </tr>
+            {Object.keys(price).map(key => {
+              if (key === "05. price" || "07. latest trading day" || "10. change percent") { 
+              return (
+                <tr key={key}>
+                  <td className="text-right">{key}</td>
+                  <td>{price[key]}</td>
+                </tr>
+              );} else {
+                return <div></div>
+              }
+            })}
           </tbody>
         </table>
+   
         <div className="container text-center mx-auto">
           <button
             onClick={() => setCurrentStock(stock)}

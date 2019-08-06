@@ -28,8 +28,7 @@ const Stocks = ({portfolios:{current},prices:{prices}, getPrices, stocks:{stocks
             {stocks !== null && !loading ? (
                  data.map((stock) => (
                      <div className="container">
-                        <StockItem key={stock["stock"]._id} stock={stock["stock"]} />
-                        <PriceItem key={stock["stock"]._id} price={stock["price"]} />}
+                        <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />}
                     </div>
                 ))
             ) : <div class="spinner-border" role="status">

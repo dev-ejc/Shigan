@@ -17,6 +17,7 @@ export const getNews = () => dispatch => {
     })
 }
 
+
   // Set Loading
   export const setLoading = () => async dispatch => {
     dispatch({
