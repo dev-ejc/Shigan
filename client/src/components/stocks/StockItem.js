@@ -5,19 +5,24 @@ import {
   setCurrentStock,
   clearCurrentStock
 } from "../../state/stocks/stocksAction";
+import {
+  deletePrice
+} from "../../state/prices/pricesActions";
+
 import { connect } from "react-redux";
 
 const StockItem = ({
-  price,
   stock,
   deleteStock,
   setCurrentStock,
-  clearCurrentStock
+  clearCurrentStock,
+  deletePrice
 }) => {
   const { _id, ticker, shares } = stock;
 
   const onDelete = () => {
     deleteStock(_id);
+    deletePrice()
     clearCurrentStock();
   };
 
@@ -27,14 +32,6 @@ const StockItem = ({
         <h3 className="card-title text-dark text-left">{ticker}</h3>
         <table className="table table-bordered">
           <tbody>
-            {Object.keys(price).map(key => {
-              return (
-                <tr key={key}>
-                  <td className="text-right">{key}</td>
-                  <td>{price[key]}</td>
-                </tr>
-              );
-            })}
             <tr key={"shares"}>
               <td className="text-right">Shares</td>
               <td>{shares}</td>
@@ -67,5 +64,5 @@ const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { deleteStock, setCurrentStock, clearCurrentStock }
+  { deleteStock, setCurrentStock, clearCurrentStock, deletePrice }
 )(StockItem);

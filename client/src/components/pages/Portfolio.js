@@ -17,7 +17,7 @@ const Portfolio = () => {
           </div>
           <div className='col'>
             {/* <Visuals /> */}
-            <News />
+            {/* <News /> */}
           </div>
         </div>
       </div>

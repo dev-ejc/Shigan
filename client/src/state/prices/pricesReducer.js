@@ -1,4 +1,4 @@
-import { GET_PRICES, ADD_PRICE, SET_LOADING, PRICE_ERROR } from "./types";
+import { GET_PRICES, ADD_PRICE, SET_LOADING, PRICE_ERROR, DELETE_PRICE } from "./types";
 
 const initialState = {
   prices: null,
@@ -18,6 +18,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         prices: [...state.prices,  action.payload],
+        loading: false
+      };
+    case DELETE_PRICE:
+      return {
+        ...state,
+        prices: state.prices.splice(action.payload,1),
         loading: false
       };
 

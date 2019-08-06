@@ -27,7 +27,7 @@ export default (state = initialState,action) => {
         case DELETE_STOCK:
             return {
                 ...state,
-                stocks: state.stocks.filter(stock => stock._id !== action.payload),
+                stocks: state.stocks.filter(stock => stock["stock"]._id !== action.payload),
                 loading:false
             }
 
@@ -77,7 +77,7 @@ export default (state = initialState,action) => {
                 ...state,
                 filtered:state.stocks.filter(stock => {
                     const regex = new RegExp(`${action.payload}`, 'gi')
-                    return stock.ticker.match(regex)                
+                    return stock["stock"].ticker.match(regex)                
                 }),
                 loading:false
             }

@@ -69,7 +69,7 @@ export const updateCurrentStock = stock => async dispatch => {
   try {
     console.log(stock);
     setLoading();
-    const res = await axios.put(`api/stocks/${stock._id}`, stock, config);
+    const res = await axios.put(`api/stocks/${stock["stock"]._id}`, stock, config);
     dispatch({
       type: UPDATE_CURRENT_STOCK,
       payload: res.data

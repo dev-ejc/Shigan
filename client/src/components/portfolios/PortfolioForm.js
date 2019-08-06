@@ -69,7 +69,7 @@ const PortfolioForm = ({portfolios:{current}, addPortfolio,updateCurrentPortfoli
 }
 
 PortfolioForm.propTypes = {
-    portfolios: PropTypes.array.isRequired
+    portfolios: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

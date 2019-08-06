@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { addPrice } from '../../state/prices/pricesActions';
-import { addStock,updateCurrentStock,clearCurrentStock, getStocks } from '../../state/stocks/stocksAction'
+import { addStock,updateCurrentStock,clearCurrentStock } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const StockForm = ({portfolios,stocks:{current},addPrice, addStock,updateCurrentStock,clearCurrentStock}) => {
+const StockForm = ({portfolios,stocks:{current}, addPrice, addStock,updateCurrentStock,clearCurrentStock}) => {
 
     const [stock, setStock] =  useState({
         ticker:'',
@@ -39,7 +39,7 @@ const StockForm = ({portfolios,stocks:{current},addPrice, addStock,updateCurrent
             clearCurrentStock()
         } else {
             addStock(stock, portfolios.current._id)
-            addPrice(stock.ticker)
+            //addPrice(stock.ticker)
             setStock(
                 {
                     ticker:'',
