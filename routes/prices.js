@@ -63,11 +63,13 @@ router.get("/historical/:id", auth, async (req, res) => {
           "https://www.alphavantage.co/query",
           configs
         ).then(price => {
-          
           Object.keys(price.data["Time Series (Daily)"]).forEach(key => {
-            Object.keys(price.data["Time Series (Daily)"][key]).forEach(k => {
-              price.data["Time Series (Daily)"][key][k] = price.data["Time Series (Daily)"][key][k] * stock.shares 
-            })
+            if(price.data["Time Series (Daily)"][key]["4. close"] !== null) {
+              price.data["Time Series (Daily)"][key] = price.data["Time Series (Daily)"][key]["4. close"] * stock.shares
+            } else {
+              console.log('sneak')
+              price.data["Time Series (Daily)"][key] = price.data["Time Series (Daily)"][key]["1. open"] * stock.shares
+            } 
           })
           return price.data["Time Series (Daily)"]
         });
@@ -76,14 +78,10 @@ router.get("/historical/:id", auth, async (req, res) => {
       res.send(result.reduce((r,e) => {
         return Object.keys(e).forEach(key => {
           if(!r[key]) {
-            r[key] = {}
-            Object.keys(e[key]).forEach(k => {
-              r[key][k] = 0 + e[key][k]
-            })
+            r[key] = 0
+            r[key] += e[key]
           } else {
-            Object.keys(e[key]).forEach(k => {
-              r[key][k] = r[key][k] + e[key][k]
-            })
+              r[key] += e[key]
           }
         }),r
       },{}))
