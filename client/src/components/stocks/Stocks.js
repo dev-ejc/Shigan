@@ -13,7 +13,7 @@ const Stocks = ({portfolios:{current},prices:{prices}, getHistoricalPrices, stoc
     let data = stocks
 
     useEffect(() => {
-        getHistoricalPrices(current._id)
+        //getHistoricalPrices(current._id)
         //getPrices(current._id)
         getStocks(current._id)
     }, //eslint-disable-next-line

@@ -8,14 +8,15 @@ const Visuals = ({ prices: { historicalPrices } }) => {
     <div className="container">
       <table className="table table-bordered">
         <tbody>
-          {Object.keys(historicalPrices).forEach(key => {
+          <tr key = {"hi"}><td>Hi</td></tr>
+          {/* {Object.keys(historicalPrices).forEach(key => {
             return (
               <tr key={key}>
                 <td className="text-right">{key}</td>
                 <td>{historicalPrices[key]["1. open"]}</td>
               </tr>
             );
-          })}
+          })} */}
         </tbody>
       </table>
     </div>
