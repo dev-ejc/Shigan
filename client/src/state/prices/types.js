@@ -1,4 +1,5 @@
 export const GET_PRICES = 'GET_PRICES'
+export const GET_HISTORICAL_PRICES = 'GET_PRICES'
 export const ADD_PRICE = 'ADD_PRICE'
 export const DELETE_PRICE = 'DELETE_PRICE'
 export const PRICE_ERROR = 'PRICE_ERROR'

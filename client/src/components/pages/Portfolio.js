@@ -3,6 +3,8 @@ import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
 import StockFilter from '../stocks/StockFilter'
 import News from '../news/News'
+import Visuals from '../visuals/Visuals'
+
 const Portfolio = () => {
     return (
         <div className="container mt-2">
@@ -16,7 +18,7 @@ const Portfolio = () => {
             <Stocks />
           </div>
           <div className='col'>
-            {/* <Visuals /> */}
+            <Visuals />
             {/* <News /> */}
           </div>
         </div>

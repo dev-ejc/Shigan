@@ -1,6 +1,7 @@
-import { GET_PRICES, ADD_PRICE, SET_LOADING, PRICE_ERROR, DELETE_PRICE } from "./types";
+import { GET_PRICES, ADD_PRICE, SET_LOADING, PRICE_ERROR, DELETE_PRICE, GET_HISTORICAL_PRICES } from "./types";
 
 const initialState = {
+  historicalPrices: null,
   prices: null,
   loading: false,
   error: null
@@ -12,6 +13,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         prices: action.payload,
+        loading: false
+      };
+    case GET_HISTORICAL_PRICES:
+      return {
+        ...state,
+        historicalPrices: action.payload,
         loading: false
       };
     case ADD_PRICE:

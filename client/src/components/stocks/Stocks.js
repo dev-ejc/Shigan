@@ -5,14 +5,15 @@ import { getPrices } from '../../state/prices/pricesActions'
 import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
+import { getHistoricalPrices } from '../../state/prices/pricesActions'
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all stock items
-const Stocks = ({portfolios:{current},prices:{prices}, getPrices, stocks:{stocks,loading,filtered}, getStocks}) => {
+const Stocks = ({portfolios:{current},prices:{prices}, getHistoricalPrices, stocks:{stocks,loading,filtered}, getStocks}) => {
     
     let data = stocks
 
     useEffect(() => {
+        getHistoricalPrices(current._id)
         //getPrices(current._id)
         getStocks(current._id)
     }, //eslint-disable-next-line
@@ -28,7 +29,7 @@ const Stocks = ({portfolios:{current},prices:{prices}, getPrices, stocks:{stocks
             {stocks !== null && !loading ? (
                  data.map((stock) => (
                      <div className="container">
-                        <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />}
+                        <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />
                     </div>
                 ))
             ) : <div class="spinner-border" role="status">
@@ -48,4 +49,4 @@ const mapStateToProps = state => ({
     portfolios:state.portfolios
 });
 
-export default connect(mapStateToProps, {getPrices,getStocks})(Stocks)
+export default connect(mapStateToProps, {getPrices,getStocks, getHistoricalPrices})(Stocks)

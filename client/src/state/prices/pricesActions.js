@@ -1,5 +1,6 @@
 import {
   GET_PRICES,
+  GET_HISTORICAL_PRICES,
   SET_LOADING,
   PRICE_ERROR,
   ADD_PRICE,
@@ -24,6 +25,36 @@ export const getPrices = id => dispatch => {
       console.log(res.data);
       dispatch({
         type: GET_PRICES,
+        payload: res.data
+      });
+      abortController.abort();
+    })
+    .catch(err => {
+      dispatch({
+        type: PRICE_ERROR,
+        payload: err
+      });
+      abortController.abort();
+    });
+};
+
+//@TODO possible breakpoint
+export const getHistoricalPrices = id => dispatch => {
+  setLoading();
+  const abortController = new AbortController();
+  const signal = abortController.signal;
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    signal
+  };
+  axios
+    .get(`api/prices/historical/${id}`, config)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: GET_HISTORICAL_PRICES,
         payload: res.data
       });
       abortController.abort();
