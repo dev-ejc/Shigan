@@ -13,7 +13,6 @@ const key = config.get("alphaKey");
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
 router.get("/:id", auth, async (req, res) => {
-  console.log('Price route hit')
   try {
     const stocks = await Stock.find({ portfolio: req.params.id }).sort({
       date: -1
@@ -47,12 +46,10 @@ router.get("/:id", auth, async (req, res) => {
 // @access  Private
 // @TODO    abstract route framework
 router.get("/historical/:id", auth, async (req, res) => {
-  console.log('Historical Price route hit')
   try {
     const stocks = await Stock.find({ portfolio: req.params.id }).sort({
       date: -1
     });
-    console.log(stocks)
     let promises = stocks.map(stock => {
         const configs = {
           params: {
@@ -66,17 +63,17 @@ router.get("/historical/:id", auth, async (req, res) => {
           "https://www.alphavantage.co/query",
           configs
         ).then(price => {
-          const prices = price.data["Time Series (Daily)"]
-          Object.keys(prices).forEach(key => {
-            Object.keys(prices[key]).forEach(k => {
-              prices[key][k] = prices[key][k] * stock.shares 
+          
+          Object.keys(price.data["Time Series (Daily)"]).forEach(key => {
+            Object.keys(price.data["Time Series (Daily)"][key]).forEach(k => {
+              price.data["Time Series (Daily)"][key][k] = price.data["Time Series (Daily)"][key][k] * stock.shares 
             })
           })
-          return prices
+          return price.data["Time Series (Daily)"]
         });
     });
     Promise.all(promises).then(result => {
-      const data = result.reduce((r,e) => {
+      res.send(result.reduce((r,e) => {
         return Object.keys(e).forEach(key => {
           if(!r[key]) {
             r[key] = {}
@@ -89,8 +86,7 @@ router.get("/historical/:id", auth, async (req, res) => {
             })
           }
         }),r
-      },{})
-      res.send(data)
+      },{}))
     })
   } catch (err) {
     console.error(err.message);
@@ -105,7 +101,6 @@ router.get("/historical/:id", auth, async (req, res) => {
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
 router.get("/:ticker", auth, async (req, res) => {
-  console.log('Ticker Price route hit')
   try {
         const configs = {
           params: {
@@ -132,7 +127,6 @@ router.get("/:ticker", auth, async (req, res) => {
 // @TODO    abstract route framework
 // @TODO    What happend to AbortControllers
 router.get("/search/:keyword", auth, async (req, res) => {
-  console.log('Search route hit')
   try {
         const configs = {
           params: {

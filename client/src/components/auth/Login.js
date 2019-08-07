@@ -32,7 +32,6 @@ const Login = ({history, setAlert,login,clearErrors, auths:{error,isAuthenticate
         if( email === '' || password === '') {
             setAlert('Please fill in all fields')
         } else {
-            console.log('Submit Initialized')
             login({email,password})
         }
     }

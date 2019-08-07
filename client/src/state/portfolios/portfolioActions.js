@@ -9,7 +9,6 @@ export const getPortfolios = () => async dispatch => {
     try {
       setLoading();
       const res = await axios.get("/api/portfolios", config);
-      console.log(res.data);
       dispatch({
         type: GET_PORTFOLIOS,
         payload: res.data

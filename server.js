@@ -61,11 +61,11 @@ app.set("port",PORT)
 var server = app.listen(app.get('port'), () => {
     console.log(`Server Started on ${PORT}`)
     connectDB()
-    setTimeout(async () => {
-        await disconnectDB()
-        server.close(() => {
-        console.log("Server Shutdown")
-    })},240000)
+    // setTimeout(async () => {
+    //     await disconnectDB()
+    //     server.close(() => {
+    //     console.log("Server Shutdown")
+    // })},10000)
 })
 
 //Adding Routes

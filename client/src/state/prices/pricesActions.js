@@ -22,7 +22,6 @@ export const getPrices = id => dispatch => {
   axios
     .get(`api/prices/${id}`, config)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: GET_PRICES,
         payload: res.data
@@ -52,7 +51,6 @@ export const getHistoricalPrices = id => dispatch => {
   axios
     .get(`api/prices/historical/${id}`, config)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: GET_HISTORICAL_PRICES,
         payload: res.data
@@ -82,7 +80,6 @@ export const addPrice = ticker => dispatch => {
   axios
     .get(`api/prices/ticker/${ticker}`, config)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: ADD_PRICE,
         payload: res.data

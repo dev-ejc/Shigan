@@ -4,7 +4,6 @@ import axios from 'axios'
 
 // Load User
 export const loadUser = () => async dispatch => {
-    console.log('loading user')
   if (sessionStorage.token) {
     setAuthToken(sessionStorage.token);
   }
@@ -58,14 +57,12 @@ export const login = formData => async dispatch => {
   };
 
   try {
-    console.log("Logging in");
     const res = await axios.post("/api/auth", formData, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
     });
     await loadUser();
-    console.log("Logged in redirecting");
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,

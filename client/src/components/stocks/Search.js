@@ -14,7 +14,6 @@ const Search = props => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        console.log(keyWord)
         if (keyWord === '') {
             setAlert('danger','Input a search')
         } else {

@@ -33,9 +33,7 @@ const StockForm = ({portfolios,stocks:{current}, addPrice, addStock,updateCurren
     const onSubmit = e => {
         e.preventDefault()
         if(current) {
-            console.log(current)
-            console.log(stock)
-            updateCurrentStock(stock)
+           updateCurrentStock(stock)
             clearCurrentStock()
         } else {
             addStock(stock, portfolios.current._id)

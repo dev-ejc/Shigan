@@ -12,7 +12,6 @@ const key = config.get("alphaKey");
 // @access  Private
 // @TODO    abstract route framework
 router.get("/:id", auth, async (req, res) => {
-  console.log("Hit Stocks Route");
   try {
     const stocks = await Stock.find({ portfolio: req.params.id }).sort({
       date: -1
@@ -92,7 +91,6 @@ router.post(
 // @desc    Update portfolio stocks
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
-  console.log("Update route hit");
   const { ticker, shares, portfolio } = req.body;
   const stockFields = {};
   if (ticker) stockFields.ticker = ticker;
@@ -110,7 +108,6 @@ router.put("/:id", auth, async (req, res) => {
       { $set: stockFields },
       { new: true }
     );
-    console.log(stock);
     res.json(stock);
   } catch (err) {
     console.error(err.message);

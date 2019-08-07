@@ -4,7 +4,6 @@ import axios from 'axios'
 export const getNews = () => dispatch => {
     setLoading()
     axios.get('api/news').then(res => {
-        console.log(res.data)
         dispatch({
             type: GET_NEWS,
             payload: res.data

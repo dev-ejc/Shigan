@@ -32,7 +32,6 @@ router.get("/:name", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  console.log("Headline route hit");
   const configs = {
     headers: {
       "x-api-key": key
