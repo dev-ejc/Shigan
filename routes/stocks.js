@@ -25,9 +25,11 @@ router.get("/:id", auth, async (req, res) => {
         }
       };
       return axios
-        .get("https://www.alphavantage.co/query", configs)
+        .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
+        //.get("https://www.alphavantage.co/query", configs)
         .then(price => {
-          let data = {stock, price: price.data["Global Quote"]}
+          let data = {stock, price: price.data["profile"]}
+          //let data = {stock, price: price.data["Global Quote"]}
           return data;
         });
     });

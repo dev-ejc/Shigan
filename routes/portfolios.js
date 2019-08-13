@@ -9,6 +9,7 @@ const auth = require("../middleware/auth");
 // @access  Private
 // @TODO    abstract route framework
 router.get("/", auth, async (req, res) => {
+  console.log('Grabbing Portfolios')
   try {
     const portfolio = await Portfolio.find({ user: req.user.id }).sort({
       openDate: -1
