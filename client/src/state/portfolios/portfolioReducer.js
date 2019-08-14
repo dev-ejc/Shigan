@@ -48,7 +48,7 @@ export default (state = initialState,action) => {
         case UPDATE_CURRENT_PORTFOLIO: {
             return {
                 ...state,
-                current: state.portfolios.map(portfolio => portfolio._id === action.payload._id ? action.payload : portfolio),
+                portfolios: state.portfolios.map(portfolio => portfolio._id === action.payload._id ? action.payload : portfolio),
                 loading:false
             }
         }

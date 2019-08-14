@@ -93,9 +93,8 @@ router.post(
 // @desc    Update portfolio stocks
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
-  const { ticker, shares, portfolio } = req.body;
+  const { shares } = req.body;
   const stockFields = {};
-  if (ticker) stockFields.ticker = ticker;
   if (shares) stockFields.shares = shares;
   try {
     let stock = await Stock.findById(req.params.id);
@@ -122,6 +121,7 @@ router.put("/:id", auth, async (req, res) => {
 // @access  Private
 // @TODO    update ordering of validation
 router.delete("/:id", auth, async (req, res) => {
+  console.log('deleting stock')
   try {
     let stock = await Stock.findById(req.params.id);
     if (!stock) {

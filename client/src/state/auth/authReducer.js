@@ -1,8 +1,8 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
 
 const initialState = {
-    token: sessionStorage.getItem("token"),
-    isAuthenticated: null,
+    token: null,
+    isAuthenticated: false,
     loading: true,
     user: null,
     error: null

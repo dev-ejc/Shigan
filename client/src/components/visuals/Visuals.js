@@ -1,5 +1,4 @@
 import React from "react";
-import Plot from "react-plotly.js";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 

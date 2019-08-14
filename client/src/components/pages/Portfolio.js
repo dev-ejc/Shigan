@@ -1,8 +1,8 @@
 import React from 'react'
 import Stocks from '../stocks/Stocks'
-import StockForm from '../stocks/StockForm'
-import StockFilter from '../stocks/StockFilter'
-import News from '../news/News'
+// import StockForm from '../stocks/StockForm'
+// import StockFilter from '../stocks/StockFilter'
+// import News from '../news/News'
 import Visuals from '../visuals/Visuals'
 
 const Portfolio = () => {
@@ -13,12 +13,12 @@ const Portfolio = () => {
             <UserCard />
           </div> */}
           <div className="col">
-            <StockForm />
-            <StockFilter />
+            {/* <StockForm /> */}
+            {/* <StockFilter /> */}
             <Stocks />
           </div>
           <div className='col'>
-            <Visuals />
+            {/* <Visuals /> */}
             {/* <News /> */}
           </div>
         </div>

@@ -3,10 +3,8 @@ import setAuthToken from "../../utils/setAuthToken";
 import axios from 'axios'
 
 // Load User
+//@TODO switch localStorage to sessionStorage
 export const loadUser = () => async dispatch => {
-  if (sessionStorage.token) {
-    setAuthToken(sessionStorage.token);
-  }
   try {
     const res = await axios.get("/api/auth");
     dispatch({
@@ -49,7 +47,9 @@ export const register = formData => async dispatch => {
 };
 // Login User
 export const login = formData => async dispatch => {
-
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token);
+  }
   const config = {
     headers: {
       "Content-Type": "application/json"

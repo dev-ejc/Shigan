@@ -1,15 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Portfolios from "../portfolios/Portfolios";
 import PortfolioForm from "../portfolios/PortfolioForm";
 import PortfolioFilter from "../portfolios/PortfolioFilter";
-import AuthContext from "../../context/auth/authContext";
 //import UserCard from "../../auth/UserCard";
 import News from "../news/News";
-
+import { loadUser } from '../../state/auth/authAction'
+import { connect } from 'react-redux'
 const User = () => {
-  const authContext = useContext(AuthContext);
-  const { loadUser } = authContext;
-
   useEffect(
     () => {
       loadUser();
@@ -23,16 +20,20 @@ const User = () => {
           <UserCard />
         </div> */}
         <div className="col">
-          <PortfolioForm />
-          <PortfolioFilter />
+          {/* <PortfolioForm /> */}
+          {/* <PortfolioFilter /> */}
           <Portfolios />
         </div>
-        <div className='col'>
+        {/* <div className='col'>
           <News />
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default User;
+const mapStateToProps = state =>({
+
+})
+
+export default connect(mapStateToProps, {})(User);
