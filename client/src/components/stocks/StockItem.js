@@ -16,7 +16,7 @@ const StockItem = ({ price, stock }) => {
         <h3 className="card-title text-dark text-center">{stock.ticker}</h3>
         <div className="row no-gutters">
           <div className="col-md-4">
-            <img src={price.image} className="card-img my-auto mx-auto" />
+            <img src={price.image} className="card-img my-auto mx-auto"alt="logo" />
           </div>
           <div className="col-md-8">
             {tweak ? (

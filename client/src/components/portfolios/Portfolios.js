@@ -9,7 +9,7 @@ const Portfolios = ({portfolios: {portfolios,loading,filtered}, getPortfolios}) 
     let data = portfolios
     useEffect(() => {
         getPortfolios()
-    },
+    },//eslint-disable-next-line
     [])
 
     const [tweak, setTweak] = useState(false)

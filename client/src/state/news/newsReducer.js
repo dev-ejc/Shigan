@@ -1,4 +1,4 @@
-import { GET_NEWS, SET_LOADING, NEWS_ERROR, SET_KEYWORD, SET_CURRENT_NEW } from './types'
+import { GET_NEWS, SET_LOADING, NEWS_ERROR, SET_KEYWORD } from './types'
 
 const initialState = {
     news:null,
