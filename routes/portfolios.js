@@ -52,6 +52,7 @@ router.post(
 // @desc    Update User portfolio
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
+  console.log('Portfolio Update Route hit')
   const { name } = req.body;
   const portfolioFields = {};
   if (name) portfolioFields.name = name;

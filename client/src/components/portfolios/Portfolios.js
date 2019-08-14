@@ -7,11 +7,10 @@ import PropTypes from 'prop-types'
 //@TODO transition-groups are not functioning
 //@TODO improve scope of loading to all Portfolio items
 const Portfolios = ({portfolios: {portfolios,loading,filtered}, getPortfolios}) => {
-
     let data = portfolios
     useEffect(() => {
         getPortfolios()
-    }, //eslint-disable-next-line
+    },
     [])
 
     if (filtered !== null) {
