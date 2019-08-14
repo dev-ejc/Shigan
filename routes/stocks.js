@@ -94,6 +94,7 @@ router.post(
 // @desc    Update portfolio stocks
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
+  console.log('Hit update stock route')
   const { shares } = req.body;
   const stockFields = {};
   if (shares) stockFields.shares = shares;

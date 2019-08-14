@@ -1,15 +1,12 @@
 import React , { useEffect, useState }from 'react'
 import StockItem from './StockItem'
 import StockForm from './StockForm'
-import PriceItem from '../prices/PriceItem'
 import { getPrices } from '../../state/prices/pricesActions'
 import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getHistoricalPrices } from '../../state/prices/pricesActions'
-//@TODO transition-groups are not functioning
-//@TODO improve scope of loading to all stock items
-const Stocks = ({portfolios:{current},prices:{prices}, getHistoricalPrices, stocks:{stocks,loading,filtered}, getStocks}) => {
+
+const Stocks = ({portfolios:{current},stocks:{stocks,loading,filtered}, getStocks}) => {
     
     let data = stocks
 
