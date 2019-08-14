@@ -17,7 +17,7 @@ const Stocks = ({portfolios:{current},prices:{prices}, getHistoricalPrices, stoc
         //getPrices(current._id)
         getStocks(current._id)
     }, //eslint-disable-next-line
-    [stocks])
+    [])
 
     if (filtered !== null) {
         data = filtered

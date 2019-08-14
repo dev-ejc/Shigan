@@ -15,11 +15,11 @@ const PortfolioItem = ({
   setCurrentPortfolio,
   updateCurrentPortfolio
 }) => {
-  const { _id, name, openDate } = portfolio;
+  const { _id } = portfolio;
   const [tweak, setTweak] = useState(false);
   const [statePortfolio, setStatePortfolio] = useState({
-    name: "",
-    date: Date.now()
+      name: '',
+      openDate: "0000-00-00T00"
   });
 
   useEffect(() => {
@@ -42,6 +42,8 @@ const PortfolioItem = ({
     updateCurrentPortfolio(statePortfolio);
     setTweak(false)
   };
+
+  const { name, openDate } = statePortfolio
 
   return (
     <div className="card bg-secondary mt-1">

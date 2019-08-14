@@ -76,6 +76,7 @@ export const updateCurrentPortfolio =  portfolio => async dispatch => {
         typp: UPDATE_CURRENT_PORTFOLIO,
         payload: res.data
       });
+      await getPortfolios()
     } catch (err) {
       controlError(err, abortController);
     }
