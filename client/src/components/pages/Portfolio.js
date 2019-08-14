@@ -14,13 +14,13 @@ const Portfolio = () => {
           </div> */}
           <div className="col">
             {/* <StockForm /> */}
-            {/* <StockFilter /> */}
             <Stocks />
+            {/* <StockFilter /> */}
           </div>
-          <div className='col'>
-            {/* <Visuals /> */}
-            {/* <News /> */}
-          </div>
+          {/* <div className='col'>
+            <Visuals />
+            <News />
+          </div> */}
         </div>
       </div>
     )

@@ -77,9 +77,10 @@ router.post(
         }
       };
       axios
-        .get("https://www.alphavantage.co/query", configs)
+       .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
+        //.get("https://www.alphavantage.co/query", configs)
         .then(price => {
-          let data = {stock, price: price.data["Global Quote"]}
+          let data = {stock, price: price.data["profile"]} 
           res.send(data);
         });
     } catch (err) {

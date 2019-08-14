@@ -1,5 +1,6 @@
-import React , { useEffect }from 'react'
+import React , { useEffect, useState }from 'react'
 import StockItem from './StockItem'
+import StockForm from './StockForm'
 import PriceItem from '../prices/PriceItem'
 import { getPrices } from '../../state/prices/pricesActions'
 import { getStocks } from '../../state/stocks/stocksAction'
@@ -11,6 +12,8 @@ import { getHistoricalPrices } from '../../state/prices/pricesActions'
 const Stocks = ({portfolios:{current},prices:{prices}, getHistoricalPrices, stocks:{stocks,loading,filtered}, getStocks}) => {
     
     let data = stocks
+
+    const [tweak, setTweak] = useState(false)
 
     useEffect(() => {
         //getHistoricalPrices(current._id)
@@ -26,13 +29,16 @@ const Stocks = ({portfolios:{current},prices:{prices}, getHistoricalPrices, stoc
     //@TODO Gotta improve tracking loading states
     return (
         <div className='container'>
-            {stocks !== null && !loading ? (
+             <button onClick={() => setTweak(!tweak)} className="btn btn-dark  btn-block">
+            Add Stock
+          </button>
+            {stocks !== null && !loading && !tweak ? (
                  data.map((stock) => (
                      <div className="container">
                         <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />
                     </div>
                 ))
-            ) : <div class="spinner-border" role="status">
+            ) : tweak ? <StockForm /> :  <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
            </div>}      
         </div>
@@ -49,4 +55,4 @@ const mapStateToProps = state => ({
     portfolios:state.portfolios
 });
 
-export default connect(mapStateToProps, {getPrices,getStocks, getHistoricalPrices})(Stocks)
+export default connect(mapStateToProps, { getPrices,getStocks })(Stocks)
