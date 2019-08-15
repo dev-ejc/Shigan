@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 5000
 const { connectDB } = require('./config/db')
 const path = require('path')
 const passport = require('passport')
@@ -16,15 +15,10 @@ var sess = {
     secret:'dud3rin0',
     saveUninitialized: true,
     resave:true,
-    name:'sessionsBruh'
-}
-
-// Serve static assets in production
-if(process.env.NODE_ENV === 'production') {
-    app.set('trust proxy', 1)
-    sess.cookie.secure = true 
-    app.use(express.static('client/build'))
-    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
+    name:'sessionsBruh',
+    cookie:{
+        secure:false
+    }
 }
 
 // Session Middleware
@@ -36,9 +30,7 @@ app.use(helmet())
 
 //Middleware for json reading hehe
 app.use(express.json({extended:false}))
-
-
-
+ 
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -55,16 +47,21 @@ app.use((req,res,next) => {
     next();
 })
 
-//Setting the port
-app.set("port",PORT)
-
-var server = app.listen(app.get('port'), () => {
-    console.log(`Server Started on ${PORT}`)
-    connectDB()
-})
-
 //Adding Routes
 app.use("/api/users",require('./routes/users'))
 app.use("/api/auth",require('./routes/auth'))
 app.use("/api/stocks",require('./routes/stocks'))
 app.use("/api/portfolios",require('./routes/portfolios'))
+
+// Serve static assets in production
+if(process.env.NODE_ENV === 'production') {
+    //app.set('trust proxy', 1)
+    //sess.cookie.secure = true 
+    app.use(express.static('client/build'))
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
+}
+
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server Started`)
+    connectDB()
+})

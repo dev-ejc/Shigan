@@ -9,14 +9,12 @@ const auth = require("../middleware/auth");
 // @access  Private
 // @TODO    abstract route framework
 router.get("/", auth, async (req, res) => {
-  console.log('Grabbing Portfolios')
   try {
     const portfolio = await Portfolio.find({ user: req.user.id }).sort({
       openDate: -1
     });
     res.json(portfolio);
   } catch (err) {
-    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });

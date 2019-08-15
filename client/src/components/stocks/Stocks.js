@@ -1,6 +1,5 @@
 import React , { useEffect }from 'react'
 import StockItem from './StockItem'
-import { getPrices } from '../../state/prices/pricesActions'
 import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -43,4 +42,4 @@ const mapStateToProps = state => ({
     portfolios:state.portfolios
 });
 
-export default connect(mapStateToProps, { getPrices,getStocks })(Stocks)
+export default connect(mapStateToProps, { getStocks })(Stocks)
