@@ -4,8 +4,6 @@ const Stock = require("../models/Stock");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 const axios = require("axios");
-const config = require("config");
-const key = config.get("alphaKey");
 
 // @route   GET api/stocks
 // @desc    GET all portfolio stocks
@@ -17,13 +15,6 @@ router.get("/:id", auth, async (req, res) => {
       date: -1
     });
     let promises = stocks.map(stock => {
-      const configs = {
-        params: {
-          function: "GLOBAL_QUOTE",
-          symbol: stock.ticker,
-          apikey: key
-        }
-      };
       return axios
         .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
         //.get("https://www.alphavantage.co/query", configs)
