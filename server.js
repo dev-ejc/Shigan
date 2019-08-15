@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
-const { connectDB } = require('./config/db')
+const { connectDB, disconnectDB } = require('./config/db')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
@@ -61,6 +61,11 @@ app.set("port",PORT)
 app.listen(app.get('port'), () => {
     console.log(`Server Started on ${PORT}`)
     connectDB()
+    setTimeout(() => {
+        disconnectDB().then(() => {
+            console.log('DC DB')
+        })
+    },5000)
 })
 
 //Adding Routes

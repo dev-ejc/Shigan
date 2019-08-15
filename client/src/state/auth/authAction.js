@@ -3,7 +3,7 @@ import setAuthToken from "../../utils/setAuthToken";
 import axios from 'axios'
 
 // Load User
-//@TODO switch localStorage to sessionStorage
+//@TODO switch localStorage to localStorage
 export const loadUser = () => async dispatch => {
   try {
     const res = await axios.get("/api/auth");
@@ -47,8 +47,8 @@ export const register = formData => async dispatch => {
 };
 // Login User
 export const login = formData => async dispatch => {
-  if (sessionStorage.token) {
-    setAuthToken(sessionStorage.token);
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
   }
   const config = {
     headers: {

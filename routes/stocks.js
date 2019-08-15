@@ -5,7 +5,6 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 const axios = require("axios");
 const config = require("config");
-const key = config.get("alphaKey");
 
 // @route   GET api/stocks
 // @desc    GET all portfolio stocks
