@@ -13,7 +13,7 @@ const Portfolio = ({portfolios:{current},stocks:{stocks,loading}}) => {
                       <div className="card">
              <div className="card-body">
               <h1 className="card-title text-primary text-center m-1">{current.name}</h1>
-              {loading || stocks === null ? <div></div> :
+              {loading || stocks === null ? (<div></div> ):
                   (<h1 className="card-text text-primary text-center m-1">{`$${stocks.reduce((a,b) => {
                   return a + b.price["price"]},0)}`})}</h1>)}
               <button onClick={() => setTweak(!tweak)} className="btn btn-dark  btn-block">Add Stock</button>
