@@ -5,7 +5,7 @@ const { connectDB } = require('./config/db')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
-// const flash = require('connect-flash')
+const flash = require('connect-flash')
 const helmet = require('helmet')
 require('./config/passport')(passport)
 
@@ -46,14 +46,14 @@ app.use(passport.session());
 
 //@ TODO Validate parameters
 // Connect Flash
-// app.use(flash());
+app.use(flash());
 
 // Global vars
-// app.use((req,res,next) => {
-//     res.locals.success_msg = req.flash('success-_msg')
-//     res.locals.error_msg = req.flash('success-_msg')
-//     next();
-// })
+app.use((req,res,next) => {
+    res.locals.success_msg = req.flash('success-_msg')
+    res.locals.error_msg = req.flash('success-_msg')
+    next();
+})
 
 //Setting the port
 app.set("port",PORT)
@@ -61,18 +61,10 @@ app.set("port",PORT)
 var server = app.listen(app.get('port'), () => {
     console.log(`Server Started on ${PORT}`)
     connectDB()
-    // setTimeout(async () => {
-    //     await disconnectDB()
-    //     server.close(() => {
-    //     console.log("Server Shutdown")
-    // })},10000)
 })
 
 //Adding Routes
 app.use("/api/users",require('./routes/users'))
 app.use("/api/auth",require('./routes/auth'))
 app.use("/api/stocks",require('./routes/stocks'))
-//app.use("/api/news",require('./routes/news'))
-//app.use("/api/fundamentals",require('./routes/fundamentals'))
-//app.use("/api/prices",require('./routes/prices'))
 app.use("/api/portfolios",require('./routes/portfolios'))

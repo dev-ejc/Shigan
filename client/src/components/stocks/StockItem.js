@@ -14,11 +14,7 @@ const StockItem = ({ price, stock }) => {
     <div className="card bg-secondary mt-1">
       <div className="card-body align-content-center">
         <h3 className="card-title text-dark text-center">{stock.ticker}</h3>
-        <div className="row no-gutters">
-          <div className="col-md-4">
-            <img src={price.image} className="card-img my-auto mx-auto"alt="logo" />
-          </div>
-          <div className="col-md-8">
+            <img src={price.image} className="card-img-top mx-auto"alt="logo" />
             {tweak ? (
               <StockEdit stock={stock} />
             ) : (
@@ -32,8 +28,6 @@ const StockItem = ({ price, stock }) => {
             </button>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 
