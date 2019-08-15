@@ -46,7 +46,7 @@ export default (state = initialState,action) => {
         case UPDATE_CURRENT_STOCK: {
             return {
                 ...state,
-                stocks: state.stocks.map(stock => stock["stock"]._id === action.payload._id ? action.payload : stock),
+                stocks: state.stocks.map(stock => stock["stock"]._id === action.payload["stock"]._id ? action.payload : stock),
                 loading:false
             }
         }

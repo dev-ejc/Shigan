@@ -1,24 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import { setCurrentStock } from "../../state/stocks/stocksAction";
+import { setCurrentStock, deleteStock, updateCurrentStock } from "../../state/stocks/stocksAction";
 import { connect } from "react-redux";
 import StockEdit from "./StockEdit";
 import StockInfo from"./StockInfo";
 
-const StockItem = ({ price, stock }) => {
+const StockItem = ({ price, stock, deleteStock, updateCurrentStock }) => {
   const [tweak, setTweak] = useState(false);
   const toggle = () => {
     setTweak(!tweak);
   };
+
+  const [stateStock, setStateStock] = useState({
+    shares:0
+});
+
+useEffect(() => {
+  setStateStock(stock);
+}, []);
+
+const { _id } = stock;
+const { shares } = stateStock
+const { companyName, image } = price
+const onChange = e => {
+  setStateStock({ ...stateStock, [e.target.name]: e.target.value });
+};
+
+const onDelete = () => {
+  deleteStock(_id);
+};
+
+const onSubmit = e => {
+  e.preventDefault();
+  setTweak(false)
+  updateCurrentStock(stateStock);
+};
+
   return (
     <div className="card bg-secondary mt-1">
       <div className="card-body align-content-center">
         <h3 className="card-title text-dark text-center">{stock.ticker}</h3>
-            <img src={price.image} className="card-img-top mx-auto"alt="logo" />
+            <img src={image} className="card-img-top mx-auto"alt="logo" />
             {tweak ? (
-              <StockEdit stock={stock} />
+                    <form className="form-inline" onSubmit={onSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="shares">Shares</label>
+                      <input
+                        className="form-control"
+                        type="integer"
+                        name="shares"
+                        placeholder={0}
+                        value={shares}
+                        onChange={onChange}
+                      />
+                    </div>
+                    <button type="submit" className="btn form-control">Update</button>
+                    <button onClick={onDelete} className="btn btn-danger btn-block">
+                      Delete
+                    </button>
+                  </form>
             ) : (
-              <StockInfo price={price} shares={stock.shares} />
+              <Fragment>
+              <table className="table table-bordered">
+              <tbody>
+                <tr key={"name"}>
+                  <td className="text-right">Name</td>
+                  <td>{companyName}</td>
+                </tr>
+                <tr key={"price"}>
+                  <td className="text-right">Price</td>
+                  <td>{price.price}</td>
+                </tr>
+                  <tr key={"shares"}>
+                    <td className="text-right">Shares</td>
+                    <td>{shares}</td>
+                  </tr>
+              </tbody>
+            </table>
+            </Fragment>
             )}
             <button
               onClick={() => toggle()}
@@ -32,12 +91,14 @@ const StockItem = ({ price, stock }) => {
 };
 
 StockItem.prototype = {
-  setCurrentStock: PropTypes.func.isRequired
+  setCurrentStock: PropTypes.func.isRequired,
+  deleteStock: PropTypes.func.isRequired, 
+  updateCurrentStock: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { setCurrentStock }
+  { setCurrentStock,deleteStock, updateCurrentStock }
 )(StockItem);

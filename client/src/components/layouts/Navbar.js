@@ -13,9 +13,9 @@ const Navbar = ({auths:{isAuthenticated},logout,clearStocks, title,icon }) => {
 
     const authLinks = (
         <Fragment>
-            <li className="nav-item"><Link className="nav-link" to='/'>Home</Link></li>
-            <li className="nav-item"><Link className="nav-link" to='/About'>About</Link></li>
-            <li className="nav-item">
+            <li className="nav-item mx-auto"><Link className="nav-link" to='/'>Home</Link></li>
+            <li className="nav-item mx-auto"><Link className="nav-link" to='/About'>About</Link></li>
+            <li className="nav-item mx-auto">
                 <a className="nav-link" href="/"  onClick={onLogout}>
                     <i className="fas fa-signout-alt"></i>{' '}Logout
                 </a>
@@ -25,8 +25,8 @@ const Navbar = ({auths:{isAuthenticated},logout,clearStocks, title,icon }) => {
 
     const guestLinks = (
         <Fragment>
-            <li className="nav-item"><Link className="nav-link" to='/Register'>Register</Link></li>
-            <li className="nav-item"><Link className="nav-link" to='/Login'>Login</Link></li>
+            <li className="nav-item mx-auto"><Link className="nav-link" to='/Register'>Register</Link></li>
+            <li className="nav-item mx-auto"><Link className="nav-link" to='/Login'>Login</Link></li>
         </Fragment>
     )
     

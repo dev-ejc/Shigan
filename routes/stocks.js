@@ -111,7 +111,9 @@ router.put("/:id", auth, async (req, res) => {
       { $set: stockFields },
       { new: true }
     );
-    res.json(stock);
+    let price = await axios
+    .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
+    res.json({stock,price: price.data["profile"]});
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
