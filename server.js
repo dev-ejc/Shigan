@@ -55,10 +55,7 @@ app.use((req,res,next) => {
     next();
 })
 
-//Setting the port
-app.set("port",PORT)
-
-app.listen(app.get('port'), () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server Started on ${PORT}`)
     connectDB()
 })
