@@ -20,7 +20,7 @@ const PortfolioEdit = ({
   
   useEffect(() => {
     setStatePortfolio(portfolio);
-  }, [portfolio]);
+  }, []);
 
   const onChange = e =>
     setStatePortfolio({ ...statePortfolio, [e.target.name]: e.target.value });
