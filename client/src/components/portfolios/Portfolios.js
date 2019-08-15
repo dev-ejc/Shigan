@@ -17,7 +17,6 @@ const Portfolios = ({portfolios: {portfolios,loading,filtered}, getPortfolios}) 
     if (filtered !== null) {
         data = filtered
     }
-
     return (
         <div className='container'>
             <button onClick={() => setTweak(!tweak)} className="btn btn-dark  btn-block">
