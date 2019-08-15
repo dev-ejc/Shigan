@@ -22,7 +22,7 @@ const Login = ({history, setAlert,login,clearErrors, auths:{error,isAuthenticate
             clearErrors()
         }
     },// eslint-disable-next-line
-    [])
+    [error, isAuthenticated, history])
     const onChange = e => {
         setUser({...user,[e.target.name]:e.target.value })
     }
