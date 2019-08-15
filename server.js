@@ -58,7 +58,7 @@ app.use((req,res,next) => {
 //Setting the port
 app.set("port",PORT)
 
-var server = app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => {
     console.log(`Server Started on ${PORT}`)
     connectDB()
 })
