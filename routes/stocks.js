@@ -3,7 +3,8 @@ const router = express.Router();
 const Stock = require("../models/Stock");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
-const axios = require("axios");
+const axios = require("axios")
+const config = require("config");
 
 // @route   GET api/stocks
 // @desc    GET all portfolio stocks

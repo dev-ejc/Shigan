@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const { connectDB } = require('./config/db')
+const PORT = process.env.PORT || 5000
+const { connectDB, disconnectDB } = require('./config/db')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
@@ -61,7 +62,12 @@ if(process.env.NODE_ENV === 'production') {
     app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
 }
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log(`Server Started`)
+app.listen(app.get('port'), () => {
+    console.log(`Server Started on ${PORT}`)
     connectDB()
+    setTimeout(() => {
+        disconnectDB().then(() => {
+            console.log('DC DB')
+        })
+    },5000)
 })
