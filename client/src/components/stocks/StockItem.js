@@ -2,8 +2,6 @@ import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { setCurrentStock, deleteStock, updateCurrentStock } from "../../state/stocks/stocksAction";
 import { connect } from "react-redux";
-import StockEdit from "./StockEdit";
-import StockInfo from"./StockInfo";
 
 const StockItem = ({ price, stock, deleteStock, updateCurrentStock }) => {
   const [tweak, setTweak] = useState(false);
@@ -17,7 +15,8 @@ const StockItem = ({ price, stock, deleteStock, updateCurrentStock }) => {
 
 useEffect(() => {
   setStateStock(stock);
-}, []);
+}, //eslint-disable-next-line
+ []);
 
 const { _id } = stock;
 const { shares } = stateStock

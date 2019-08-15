@@ -1,6 +1,5 @@
-import React , { useEffect, useState }from 'react'
+import React , { useEffect }from 'react'
 import StockItem from './StockItem'
-import StockForm from './StockForm'
 import { getPrices } from '../../state/prices/pricesActions'
 import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
@@ -10,11 +9,7 @@ const Stocks = ({portfolios:{current},stocks:{stocks,loading,filtered}, getStock
     
     let data = stocks
 
-    const [tweak, setTweak] = useState(false)
-
     useEffect(() => {
-        //getHistoricalPrices(current._id)
-        //getPrices(current._id)
         getStocks(current._id)
     }, //eslint-disable-next-line
     [])
@@ -22,20 +17,16 @@ const Stocks = ({portfolios:{current},stocks:{stocks,loading,filtered}, getStock
     if (filtered !== null) {
         data = filtered
     }
-
     //@TODO Gotta improve tracking loading states
     return (
         <div className='container'>
-             <button onClick={() => setTweak(!tweak)} className="btn btn-dark  btn-block">
-            Add Stock
-          </button>
-            {stocks !== null && !loading && !tweak ? (
+            {stocks !== null && !loading ? (
                  data.map((stock) => (
                      <div className="container">
                         <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />
                     </div>
                 ))
-            ) : tweak ? <StockForm /> :  <div class="spinner-border" role="status">
+            ) :  <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
            </div>}      
         </div>

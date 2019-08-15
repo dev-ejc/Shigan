@@ -27,7 +27,8 @@ const PortfolioItem = ({
 
   useEffect(() => {
     setStatePortfolio(portfolio);
-  }, []);
+  },//eslint-disable-next-line 
+  []);
 
   const onChange = e =>
     setStatePortfolio({ ...statePortfolio, [e.target.name]: e.target.value });

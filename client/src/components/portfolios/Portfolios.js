@@ -26,7 +26,7 @@ const Portfolios = ({portfolios: {portfolios,loading,filtered}, getPortfolios}) 
             { portfolios !== null && !loading && !tweak ? (
                  data.map(portfolio => (
                      <PortfolioItem key={portfolio._id}  portfolio={portfolio}/>)
-            )) : tweak ? <PortfolioForm /> : <div class="spinner-border text-center" role="status">
+            )) : tweak ? <PortfolioForm /> : <div className="spinner-border text-center" role="status">
             <span className="sr-only">Loading...</span>
            </div>}
         </div>

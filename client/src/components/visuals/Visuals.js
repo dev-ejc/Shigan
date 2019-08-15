@@ -2,37 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const Visuals = ({ prices: { historicalPrices } }) => {
+const Visuals = ({ value }) => {
   return (
-    <div className="container">
-      <table className="table table-bordered">
-        <tbody>
-          <tr key = {"hi"}><td>Hi</td></tr>
-          {/* {Object.keys(historicalPrices).forEach(key => {
-            return (
-              <tr key={key}>
-                <td className="text-right">{key}</td>
-                <td>{historicalPrices[key]["1. open"]}</td>
-              </tr>
-            );
-          })} */}
-        </tbody>
-      </table>
-    </div>
-    // <Plot
-    //   data={[
-    //     {
-    //       x: Object.keys(historicalPrices),
-    //       y: Object.keys(historicalPrices).map(k => {
-    //         return historicalPrices[k]["1. open"]
-    //       }),
-    //       type: 'scatter',
-    //       mode: 'lines+points',
-    //       marker: {color: 'navy'},
-    //     }
-    //   ]}
-    //   layout={ {width: 320, height: 240} }
-    // />
+      <h1 className="card-text text-primary text-center m-1">{`$${value}`}</h1>
   );
 };
 
