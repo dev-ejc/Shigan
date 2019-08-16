@@ -65,9 +65,9 @@ if(process.env.NODE_ENV === 'production') {
 app.listen(app.get('port'), () => {
     console.log(`Server Started on ${PORT}`)
     connectDB()
-    setTimeout(() => {
-        disconnectDB().then(() => {
-            console.log('DC DB')
-        })
-    },5000)
+    // setTimeout(() => {
+    //     disconnectDB().then(() => {
+    //         console.log('DC DB')
+    //     })
+    // },5000)
 })
