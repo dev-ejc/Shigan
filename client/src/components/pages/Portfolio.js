@@ -10,13 +10,16 @@ const Portfolio = ({
   portfolios: { current },
   stocks: { stocks, loading }
 }) => {
-  let value = 0
+  let value = 0;
   const [tweak, setTweak] = useState(false);
-  useEffect(() => {
-    value = stocks.reduce((a, b) => {
-      return a + b.price["price"];
-    }, 0)},//eslint-disable-next-line
-    [])
+  useEffect(
+    () => {
+      value = stocks.reduce((a, b) => {
+        return a + b.price["price"];
+      }, 0);
+    }, //eslint-disable-next-line
+    []
+  );
   return (
     <div className="container mt-2 justify-contents-center align-items-center">
       <div className="card">
@@ -32,7 +35,6 @@ const Portfolio = ({
               )}
             </h1>{" "}
           </div>
-        )}
         <button
           onClick={() => setTweak(!tweak)}
           className="btn btn-dark  btn-block"
@@ -40,7 +42,6 @@ const Portfolio = ({
           Add Stock
         </button>
       </div>
-
       {tweak ? <StockForm /> : <Stocks />}
     </div>
   );
