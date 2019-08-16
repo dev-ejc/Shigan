@@ -31,18 +31,18 @@ const Portfolio = ({
               {current.name}
             </h1>
             <h1 className="card-text text-primary text-center m-1">
-              {value}
-              )}
-            </h1>{" "}
+              {"$"} {value}
+            </h1>
           </div>
+        )}
         <button
           onClick={() => setTweak(!tweak)}
           className="btn btn-dark  btn-block"
         >
           Add Stock
         </button>
+        {tweak ? <StockForm /> : <Stocks />}
       </div>
-      {tweak ? <StockForm /> : <Stocks />}
     </div>
   );
 };
