@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
-const { connectDB, disconnectDB } = require('./config/db')
+const { connectDB } = require('./config/db')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
@@ -17,8 +17,8 @@ var sess = {
     saveUninitialized: true,
     resave:true,
     name:'sessionsBruh',
-    cookie:{
-        secure:false
+    cookie: {
+        secure: true
     }
 }
 
@@ -56,8 +56,8 @@ app.use("/api/portfolios",require('./routes/portfolios'))
 
 // Serve static assets in production
 if(process.env.NODE_ENV === 'production') {
-    //app.set('trust proxy', 1)
-    //sess.cookie.secure = true 
+    app.set('trust proxy', 1)
+    sess.cookie.secure = true 
     app.use(express.static('client/build'))
     app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
 }
