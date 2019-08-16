@@ -1,7 +1,6 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
 
 const initialState = {
-    token: null,
     isAuthenticated: false,
     loading: true,
     user: null,
@@ -33,7 +32,6 @@ export default (state = initialState, action) => {
             localStorage.removeItem('token')
             return {
                 ...state,
-                token:null,
                 isAuthenticated: false,
                 loading: false,
                 user: null,
