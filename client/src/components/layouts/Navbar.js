@@ -31,7 +31,7 @@ const Navbar = ({auths:{isAuthenticated},logout,clearStocks, title,icon }) => {
     )
     
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light bg-primary">
             <a href="/" className="navbar-brand mx-auto">{title}</a>
             <button className="navbar-toggler btn-block" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

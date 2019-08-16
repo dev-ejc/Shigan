@@ -10,22 +10,16 @@ const Portfolio = ({
   portfolios: { current },
   stocks: { stocks, loading }
 }) => {
-  let value = 0;
   const [tweak, setTweak] = useState(false);
-  useEffect(
-    () => {
-      value = stocks.reduce((a, b) => {
-        return a + b.price["price"];
-      }, 0);
-    }, //eslint-disable-next-line
-    []
-  );
-  return (
-    <div className="container mt-2 justify-contents-center align-items-center">
-      <div className="card">
-        {loading || stocks === null ? (
-          <div />
-        ) : (
+  if (loading || stocks === null) {
+    return <div />;
+  } else {
+    let  value = stocks.reduce((a, b) => {
+      return a + b.price["price"];
+    }, 0);
+    return (
+      <div className="container mt-2 justify-contents-center align-items-center">
+        <div className="card">
           <div className="card-body">
             <h1 className="card-title text-primary text-center m-1">
               {current.name}
@@ -34,17 +28,17 @@ const Portfolio = ({
               {"$"} {value}
             </h1>
           </div>
-        )}
-        <button
-          onClick={() => setTweak(!tweak)}
-          className="btn btn-dark  btn-block"
-        >
-          Add Stock
-        </button>
-        {tweak ? <StockForm /> : <Stocks />}
+          <button
+            onClick={() => setTweak(!tweak)}
+            className="btn btn-dark  btn-block"
+          >
+            Add Stock
+          </button>
+          {tweak ? <StockForm /> : <Stocks />}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 Portfolio.propTypes = {
