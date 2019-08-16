@@ -63,7 +63,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 app.listen(app.get('port'), () => {
-    console.log(`Server Started on ${PORT}`)
+    console.log(`Server Started`)
     connectDB()
     // setTimeout(() => {
     //     disconnectDB().then(() => {
