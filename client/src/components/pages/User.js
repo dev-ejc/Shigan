@@ -6,7 +6,7 @@ import { getStocks } from "../../state/stocks/stocksAction";
 import PropTypes from "prop-types"
 import StockVisuals from "../stocks/StockVisuals";
 
-const User = ({getStocks}) => {
+const User = ({getStocks, stocks:{loading,stocks}}) => {
   const [tweak, setTweak] = useState(false);
 
   const toggle = () => {
@@ -20,6 +20,13 @@ const User = ({getStocks}) => {
     []
   );
 
+  if (loading || stocks === null) {
+    return (<div className="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    </div>)
+  } else {
   return (
     <div className="container mt-2">
       <div className="row">
@@ -32,13 +39,13 @@ const User = ({getStocks}) => {
     </div>
   );
 };
-
+}
 User.propTypes = {
   getStocks : PropTypes.func.isRequired
 }
 
 const mapStateToProps = state =>({
-
+  stocks:state.stocks
 })
 
 export default connect(mapStateToProps, {getStocks})(User);
