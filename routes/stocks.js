@@ -4,24 +4,32 @@ const Stock = require("../models/Stock");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 const axios = require("axios")
-const config = require("config");
+
+
+const createPayload = (stock) => {
+  return axios
+   .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
+    .then(price => {
+      let data = {stock, price: price.data["profile"]} 
+      return data;
+    });
+}
 
 // @route   GET api/stocks
 // @desc    GET all portfolio stocks
 // @access  Private
 // @TODO    abstract route framework
-router.get("/:id", auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
+  console.log('Getting stocks')
   try {
-    const stocks = await Stock.find({ portfolio: req.params.id }).sort({
+    const stocks = await Stock.find({ user: req.user.id }).sort({
       date: -1
     });
     let promises = stocks.map(stock => {
       return axios
-        .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
-        //.get("https://www.alphavantage.co/query", configs)
+       .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
         .then(price => {
-          let data = {stock, price: price.data["profile"]}
-          //let data = {stock, price: price.data["Global Quote"]}
+          let data = {stock, price: price.data["profile"]} 
           return data;
         });
     });
@@ -39,7 +47,7 @@ router.get("/:id", auth, async (req, res) => {
 // @access  Private
 // TODO     add validation for existing shares
 router.post(
-  "/:id",
+  "/",
   [
     auth,
     [
@@ -55,26 +63,14 @@ router.post(
     const { ticker, shares, purchaseDate } = req.body;
     try {
       const newStock = new Stock({
-        portfolio: req.params.id,
+        user: req.user.id,
         ticker,
         shares,
         purchaseDate
       });
       const stock = await newStock.save();
-      const configs = {
-        params: {
-          function: "GLOBAL_QUOTE",
-          symbol: stock.ticker,
-          apikey: key
-        }
-      };
-      axios
-       .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
-        //.get("https://www.alphavantage.co/query", configs)
-        .then(price => {
-          let data = {stock, price: price.data["profile"]} 
-          res.send(data);
-        });
+      const data = await createPayload(stock)
+      res.send(data)
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
@@ -95,7 +91,7 @@ router.put("/:id", auth, async (req, res) => {
     if (!stock) {
       return res.status(404).json({ msg: "Stock does not exist" });
     }
-    // if(stock.portfolio.id.toString() !== portfolio) {
+    // if(stock.user.toString() !== req.user.id) {
     //     return res.status(401).json({ msg:"Not authorized"})
     // }
     stock = await Stock.findByIdAndUpdate(
@@ -103,9 +99,8 @@ router.put("/:id", auth, async (req, res) => {
       { $set: stockFields },
       { new: true }
     );
-    let price = await axios
-    .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
-    res.json({stock,price: price.data["profile"]});
+    const data = await createPayload(stock)
+    res.send(data)
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -117,7 +112,6 @@ router.put("/:id", auth, async (req, res) => {
 // @access  Private
 // @TODO    update ordering of validation
 router.delete("/:id", auth, async (req, res) => {
-  console.log('deleting stock')
   try {
     let stock = await Stock.findById(req.params.id);
     if (!stock) {

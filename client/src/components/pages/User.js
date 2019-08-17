@@ -1,23 +1,44 @@
-import React, { useEffect } from "react";
-import Portfolios from "../portfolios/Portfolios";
-import { loadUser } from '../../state/auth/authAction'
+import React, { useEffect, useState } from "react";
 import { connect } from 'react-redux'
-const User = () => {
+import Stocks from '../stocks/Stocks'
+import StockForm from '../stocks/StockForm'
+import { getStocks } from "../../state/stocks/stocksAction";
+import PropTypes from "prop-types"
+import StockVisuals from "../stocks/StockVisuals";
+
+const User = ({getStocks}) => {
+  const [tweak, setTweak] = useState(false);
+
+  const toggle = () => {
+    setTweak(!tweak);
+  }
+
   useEffect(
     () => {
-      loadUser();
+      getStocks();
     }, //eslint-disable-next-line
     []
   );
+
   return (
     <div className="container mt-2">
-          <Portfolios />
+      <div className="row">
+          <div className="col">
+            <StockVisuals />
+            <button onClick={toggle}className="button btn-primary btn-block mb-2">Purchase Stock</button>
+            {tweak ? <StockForm /> : <Stocks />}
+          </div>
+        </div>
     </div>
   );
 };
+
+User.propTypes = {
+  getStocks : PropTypes.func.isRequired
+}
 
 const mapStateToProps = state =>({
 
 })
 
-export default connect(mapStateToProps, {})(User);
+export default connect(mapStateToProps, {getStocks})(User);

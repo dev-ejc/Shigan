@@ -3,7 +3,7 @@ import { addStock } from "../../state/stocks/stocksAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const StockForm = ({ portfolios }) => {
+const StockForm = ({addStock}) => {
   const [stock, setStock] = useState({
     ticker: "",
     shares: 0,
@@ -14,7 +14,7 @@ const StockForm = ({ portfolios }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    addStock(stock, portfolios.current._id);
+    addStock(stock);
     setStock({
       ticker: "",
       shares: 0,
@@ -57,11 +57,9 @@ const StockForm = ({ portfolios }) => {
 };
 
 StockForm.prototype = {
-  prices: PropTypes.object.isRequired,
-  stocks: PropTypes.object.isRequired
+  addStock: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  portfolios: state.portfolios
 });
 
 export default connect(

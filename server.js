@@ -52,22 +52,16 @@ app.use((req,res,next) => {
 app.use("/api/users",require('./routes/users'))
 app.use("/api/auth",require('./routes/auth'))
 app.use("/api/stocks",require('./routes/stocks'))
-app.use("/api/portfolios",require('./routes/portfolios'))
 
 // Serve static assets in production
 if(process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1)
-    sess.cookie.secure = true 
+    sess.cookie.secure = true
     app.use(express.static('client/build'))
     app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'client','build','index.html')))
 }
 
 app.listen(PORT, () => {
-    console.log(`Server Started`)
+    console.log(`Server Started on ${PORT}`)
     connectDB()
-    // setTimeout(() => {
-    //     disconnectDB().then(() => {
-    //         console.log('DC DB')
-    //     })
-    // },5000)
 })

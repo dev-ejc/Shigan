@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const jwtSecret = config.get('jwtSecret')
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
@@ -13,6 +14,7 @@ const auth = require("../middleware/auth");
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
+    console.log('Getting User...')
     const user = await User.findById(req.user.id).select("-password");
     res.json(user);
   } catch (err) {
@@ -31,6 +33,7 @@ router.post(
     check("password", "Password is required").exists()
   ],
   async (req, res, next) => {
+    console.log('Post route hit')
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
