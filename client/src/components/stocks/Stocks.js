@@ -4,13 +4,8 @@ import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const Stocks = ({stocks:{stocks,loading}, getStocks}) => {
+const Stocks = ({stocks:{stocks,loading}}) => {
     let data = stocks
-    useEffect(() => {
-        getStocks()
-    }, //eslint-disable-next-line
-    [])
-
     if (stocks === null || loading ) {
         return (<div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
