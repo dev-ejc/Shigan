@@ -13,14 +13,14 @@ const StockVisuals = ({stocks:{stocks,loading}}) => {
         const value = stocks.reduce((a,b) => {
             return a + (b.stock.shares * b.price.price)
         },0)
-        return(<h1 className="text-primary mb-1">{`$${value}`}</h1>)
+        return(<h1 className="text-primary text-center mb-2">{`$${value}`}</h1>)
     }
 }
 
 StockVisuals.propTypes = {
     stocks: PropTypes.object.isRequired
 }
-mapStateToProps = () => ( {
+const mapStateToProps = (state) => ( {
     stocks: state.stocks
 })
 

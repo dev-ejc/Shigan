@@ -1,4 +1,4 @@
-import React , { useEffect }from 'react'
+import React from 'react'
 import StockItem from './StockItem'
 import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
