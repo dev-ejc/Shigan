@@ -99,5 +99,5 @@ const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { setCurrentStock,deleteStock, updateCurrentStock }
+  { setCurrentStock, deleteStock, updateCurrentStock }
 )(StockItem);

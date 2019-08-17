@@ -39,7 +39,7 @@ async (req,res) => {
                 id: user.id
             }
         }
-        jwt.sign(payload,jwtSecet, {
+        jwt.sign(payload,jwtSecret, {
             expiresIn: 18000
         }, (err,token) => {
             if(err) throw err

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import Portfolios from "../portfolios/Portfolios";
 import { loadUser } from '../../state/auth/authAction'
 import { connect } from 'react-redux'
+import Stocks from '../stocks/Stocks'
+import StockForm from '../stocks/StockForm'
 const User = () => {
   useEffect(
     () => {
@@ -12,6 +13,7 @@ const User = () => {
   return (
     <div className="container mt-2">
           <Stocks />
+          <StockForm />
     </div>
   );
 };

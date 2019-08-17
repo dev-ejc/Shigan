@@ -5,36 +5,26 @@ import axios from 'axios'
 // Load User
 //@TODO switch localStorage to localStorage
 export const loadUser = () => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
-  const config = {
-    signal
-  };
   try {
-    const res = await axios.get("/api/auth", config);
+    const res = await axios.get("/api/auth");
     dispatch({
       type: USER_LOADED,
       payload: res.data
     });
-    abortController.abort()
   } catch (err) {
     dispatch({
       type: AUTH_ERROR
     });
-    abortController.abort()
   }
 };
 
 // Register User
 // TODO find a way to utilize https connections instead of http
 export const register = formData => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
   const config = {
     headers: {
       "Content-Type": "application/json"
-    },
-    signal
+    }
   };
   try {
     const res = await axios.post("/api/users", formData, config);
@@ -43,13 +33,11 @@ export const register = formData => async dispatch => {
       payload: res.data
     });
     await loadUser();
-    abortController.abort();
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
       payload: err.message
     });
-    abortController.abort();
   }
 };
 // Login User
@@ -62,7 +50,6 @@ export const login = formData => async dispatch => {
       "Content-Type": "application/json"
     }
   };
-
   try {
     const res = await axios.post("/api/auth", formData, config);
     dispatch({
