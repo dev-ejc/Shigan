@@ -11,7 +11,7 @@ const User = () => {
   );
   return (
     <div className="container mt-2">
-          <Portfolios />
+          <Stocks />
     </div>
   );
 };
