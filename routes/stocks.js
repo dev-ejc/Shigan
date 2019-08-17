@@ -18,10 +18,8 @@ router.get("/:id", auth, async (req, res) => {
     let promises = stocks.map(stock => {
       return axios
         .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
-        //.get("https://www.alphavantage.co/query", configs)
         .then(price => {
           let data = {stock, price: price.data["profile"]}
-          //let data = {stock, price: price.data["Global Quote"]}
           return data;
         });
     });
@@ -61,16 +59,8 @@ router.post(
         purchaseDate
       });
       const stock = await newStock.save();
-      const configs = {
-        params: {
-          function: "GLOBAL_QUOTE",
-          symbol: stock.ticker,
-          apikey: key
-        }
-      };
       axios
        .get(`https://financialmodelingprep.com/api/v3/company/profile/${stock.ticker}`)
-        //.get("https://www.alphavantage.co/query", configs)
         .then(price => {
           let data = {stock, price: price.data["profile"]} 
           res.send(data);
@@ -95,7 +85,9 @@ router.put("/:id", auth, async (req, res) => {
     if (!stock) {
       return res.status(404).json({ msg: "Stock does not exist" });
     }
-    // if(stock.portfolio.id.toString() !== portfolio) {
+    // console.log(req.stock.user.id)
+    // console.log(req.user.id)
+    // if(stock.user.toString() !== req.user.id) {
     //     return res.status(401).json({ msg:"Not authorized"})
     // }
     stock = await Stock.findByIdAndUpdate(
@@ -117,7 +109,6 @@ router.put("/:id", auth, async (req, res) => {
 // @access  Private
 // @TODO    update ordering of validation
 router.delete("/:id", auth, async (req, res) => {
-  console.log('deleting stock')
   try {
     let stock = await Stock.findById(req.params.id);
     if (!stock) {
