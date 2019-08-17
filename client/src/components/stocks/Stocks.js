@@ -14,8 +14,8 @@ const Stocks = ({stocks:{stocks,loading}}) => {
         return (
             <div className='container'>
                      {data.map((stock) => (
-                         <div className="container">
-                            <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />
+                         <div className="container" key={stock["stock"]._id}>
+                            <StockItem  stock={stock["stock"]} price={stock["price"]} />
                         </div>
                     ))}      
             </div>)
