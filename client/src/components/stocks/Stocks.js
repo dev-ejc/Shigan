@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 const Stocks = ({stocks:{stocks,loading}, getStocks}) => {
-    
     let data = stocks
-
     useEffect(() => {
         getStocks()
     }, //eslint-disable-next-line
@@ -30,11 +28,10 @@ const Stocks = ({stocks:{stocks,loading}, getStocks}) => {
 }
 
 Stocks.propTypes = {
-    prices: PropTypes.object.isRequired
+    stocks: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    prices:state.prices,
     stocks:state.stocks,
 });
 
