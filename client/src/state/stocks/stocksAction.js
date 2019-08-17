@@ -1,51 +1,55 @@
-import  { ADD_STOCK, DELETE_STOCK, GET_STOCKS, CLEAR_STOCKS, SET_CURRENT_STOCK, CLEAR_CURRENT_STOCK, UPDATE_CURRENT_STOCK, FILTER_STOCKS, CLEAR_FILTER, SET_LOADING, STOCK_ERROR } from './types'
-import axios from 'axios'
+import {
+  ADD_STOCK,
+  DELETE_STOCK,
+  GET_STOCKS,
+  CLEAR_STOCKS,
+  SET_CURRENT_STOCK,
+  CLEAR_CURRENT_STOCK,
+  UPDATE_CURRENT_STOCK,
+  FILTER_STOCKS,
+  CLEAR_FILTER,
+  SET_LOADING,
+  STOCK_ERROR
+} from "./types";
+import axios from "axios";
 
 // @todo abstract api requests
-export const getStocks = id => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
-  const config = { signal };
+export const getStocks = () => async dispatch => {
   try {
     setLoading();
-    const res = await axios.get(`/api/stocks/${id}`, config);
+    const res = await axios.get("/api/stocks");
     dispatch({
       type: GET_STOCKS,
       payload: res.data
     });
-    abortController.abort();
   } catch (err) {
-    stockError(err, abortController);
+    stockError(err);
   }
 };
 
 // Add Stock
-export const addStock = (stock, id) => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
+export const addStock = (stock) => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
-    },
-    signal
+    }
   };
   try {
     setLoading();
-    const res = await axios.post(`/api/stocks/${id}`, stock, config);
+    const res = await axios.post("/api/stocks", stock, config);
     dispatch({
       type: ADD_STOCK,
       payload: res.data
     });
   } catch (err) {
-    stockError(err, abortController);
+    stockError(err);
   }
 };
 
 // Delete Stock
 export const deleteStock = id => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
-  const config = { signal };
+  const config = { params: {
+    id} };
   try {
     setLoading();
     await axios.delete(`api/stocks/${id}`, config);
@@ -54,27 +58,21 @@ export const deleteStock = id => async dispatch => {
       payload: id
     });
   } catch (err) {
-    stockError(err, abortController);
+    stockError(err);
   }
 };
 
 //Update CURRENT_STOCK
 export const updateCurrentStock = stock => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
-  const config = {
-      "Content-Type": "application/json",
-    signal
-  };
   try {
     setLoading();
-    const res = await axios.put(`api/stocks/${stock._id}`, stock, config);
+    const res = await axios.put(`api/stocks/${stock._id}`, stock);
     dispatch({
       type: UPDATE_CURRENT_STOCK,
       payload: res.data
     });
   } catch (err) {
-    stockError(err, abortController);
+    stockError(err);
   }
 };
 
@@ -123,10 +121,9 @@ export const clearStocks = () => dispatch => {
 };
 
 //Stock Error
-export const stockError = (err, abortController) => dispatch => {
+export const stockError = (err) => dispatch => {
   dispatch({
     type: STOCK_ERROR,
     payload: err.message
   });
-  abortController.abort();
 };

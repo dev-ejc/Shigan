@@ -54,13 +54,10 @@ const onSubmit = e => {
                       />
                     </div>
                     <button type="submit" className="btn form-control">Update</button>
-                    <button onClick={onDelete} className="btn btn-danger btn-block">
-                      Delete
-                    </button>
                   </form>
             ) : (
               <Fragment>
-              <table className="table table-bordered">
+              <table className="table table-bordered table-responsive">
               <tbody>
                 <tr key={"name"}>
                   <td className="text-right">Name</td>
@@ -84,6 +81,9 @@ const onSubmit = e => {
             >
               {tweak ? "Back" : "Edit"}
             </button>
+            <button onClick={onDelete} className="btn btn-danger btn-block">
+                      Delete
+                    </button>
           </div>
         </div>
   );
@@ -99,5 +99,5 @@ const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { setCurrentStock,deleteStock, updateCurrentStock }
+  { setCurrentStock, deleteStock, updateCurrentStock }
 )(StockItem);

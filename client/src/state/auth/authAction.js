@@ -21,13 +21,10 @@ export const loadUser = () => async dispatch => {
 // Register User
 // TODO find a way to utilize https connections instead of http
 export const register = formData => async dispatch => {
-  const abortController = new AbortController();
-  const signal = abortController.signal;
   const config = {
     headers: {
       "Content-Type": "application/json"
-    },
-    signal
+    }
   };
   try {
     const res = await axios.post("/api/users", formData, config);
@@ -36,13 +33,11 @@ export const register = formData => async dispatch => {
       payload: res.data
     });
     await loadUser();
-    abortController.abort();
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
       payload: err.message
     });
-    abortController.abort();
   }
 };
 // Login User
@@ -55,7 +50,6 @@ export const login = formData => async dispatch => {
       "Content-Type": "application/json"
     }
   };
-
   try {
     const res = await axios.post("/api/auth", formData, config);
     dispatch({
