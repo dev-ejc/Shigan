@@ -54,9 +54,6 @@ const onSubmit = e => {
                       />
                     </div>
                     <button type="submit" className="btn form-control">Update</button>
-                    <button onClick={onDelete} className="btn btn-danger btn-block">
-                      Delete
-                    </button>
                   </form>
             ) : (
               <Fragment>
@@ -84,6 +81,9 @@ const onSubmit = e => {
             >
               {tweak ? "Back" : "Edit"}
             </button>
+            <button onClick={onDelete} className="btn btn-danger btn-block">
+                      Delete
+                    </button>
           </div>
         </div>
   );
