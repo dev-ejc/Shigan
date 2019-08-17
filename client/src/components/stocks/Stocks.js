@@ -7,8 +7,8 @@ import PropTypes from 'prop-types'
 const Stocks = ({stocks:{stocks,loading}}) => {
     let data = stocks
     if (stocks === null || loading ) {
-        return (<div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+        return (<div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
        </div>)
     } else {
         return (

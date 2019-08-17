@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 const StockVisuals = ({stocks:{stocks,loading}}) => {
     if(stocks === null || loading) {
         return (
-            <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
+            <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
             </div>
         )
     } else {
