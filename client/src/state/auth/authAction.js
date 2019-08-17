@@ -5,12 +5,12 @@ import axios from 'axios'
 // Load User
 //@TODO switch localStorage to localStorage
 export const loadUser = () => async dispatch => {
-  try {
-    const abortController = new AbortController();
+  const abortController = new AbortController();
   const signal = abortController.signal;
   const config = {
     signal
   };
+  try {
     const res = await axios.get("/api/auth", config);
     dispatch({
       type: USER_LOADED,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { logout } from '../../state/auth/authAction'
 import { clearStocks } from '../../state/stocks/stocksAction'
 
-const Navbar = ({auths:{isAuthenticated},logout,clearStocks, title,icon }) => {
+const Navbar = ({auths:{isAuthenticated},logout,clearStocks, title, icon }) => {
     const onLogout = () => {
         logout()
         clearStocks()
