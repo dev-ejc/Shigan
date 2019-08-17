@@ -1,22 +1,6 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
+import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
 import setAuthToken from "../../utils/setAuthToken";
 import axios from 'axios'
-
-// Load User
-//@TODO switch localStorage to localStorage
-export const loadUser = () => async dispatch => {
-  try {
-    const res = await axios.get("/api/auth");
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    });
-  }
-};
 
 // Register User
 // TODO find a way to utilize https connections instead of http
@@ -32,7 +16,6 @@ export const register = formData => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    await loadUser();
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
@@ -56,7 +39,6 @@ export const login = formData => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-    await loadUser();
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
