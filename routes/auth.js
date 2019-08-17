@@ -9,20 +9,6 @@ const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
 //const passport = require('passport')
 
-// @route   GET api/users
-// @desc    GET logged in user
-// @access  Private
-router.get("/", auth, async (req, res) => {
-  try {
-    console.log('Getting User...')
-    const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 // @route   POST api/users
 // @desc    Auth logged in user
 // @access  Public

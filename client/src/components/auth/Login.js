@@ -14,7 +14,6 @@ const Login = ({history, setAlert,login,clearErrors, auths:{error,isAuthenticate
     const { email,password } = user
 
     useEffect(() => {
-        console.log('history')
         if (isAuthenticated) {
             history.push('/')
         }
