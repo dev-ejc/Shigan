@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const StockSchema = mongoose.Schema( {
-    portfolio: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'portfolio',
+        ref: 'user',
         require: true
     },
     ticker: {

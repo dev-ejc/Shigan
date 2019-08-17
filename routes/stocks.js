@@ -12,7 +12,7 @@ const config = require("config");
 // @TODO    abstract route framework
 router.get("/:id", auth, async (req, res) => {
   try {
-    const stocks = await Stock.find({ portfolio: req.params.id }).sort({
+    const stocks = await Stock.find({ user: req.params.id }).sort({
       date: -1
     });
     let promises = stocks.map(stock => {
@@ -55,7 +55,7 @@ router.post(
     const { ticker, shares, purchaseDate } = req.body;
     try {
       const newStock = new Stock({
-        portfolio: req.params.id,
+        user: req.params.id,
         ticker,
         shares,
         purchaseDate
