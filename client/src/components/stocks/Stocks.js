@@ -7,15 +7,15 @@ import PropTypes from 'prop-types'
 const Stocks = ({stocks:{stocks,loading}}) => {
     let data = stocks
     if (stocks === null || loading ) {
-        return (<div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+        return (<div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
        </div>)
     } else {
         return (
             <div className='container'>
                      {data.map((stock) => (
-                         <div className="container">
-                            <StockItem key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />
+                         <div className="container" key={stock["stock"]._id}>
+                            <StockItem  stock={stock["stock"]} price={stock["price"]} />
                         </div>
                     ))}      
             </div>)

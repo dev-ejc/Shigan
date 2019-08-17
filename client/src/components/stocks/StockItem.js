@@ -41,9 +41,8 @@ const onSubmit = e => {
         <h3 className="card-title text-dark text-center">{stock.ticker}</h3>
             <img src={image} className="card-img-top mx-auto"alt="logo" />
             {tweak ? (
-                    <form className="form-inline" onSubmit={onSubmit}>
+                    <form className="form-inline mb-2" onSubmit={onSubmit}>
                     <div className="form-group">
-                      <label htmlFor="shares">Shares</label>
                       <input
                         className="form-control"
                         type="integer"
@@ -53,7 +52,7 @@ const onSubmit = e => {
                         onChange={onChange}
                       />
                     </div>
-                    <button type="submit" className="btn form-control">Update</button>
+                    <button type="submit" className="btn btn-info form-control">Update</button>
                   </form>
             ) : (
               <Fragment>
