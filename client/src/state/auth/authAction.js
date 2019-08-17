@@ -1,6 +1,13 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
+import { REGISTER_SUCCESS, AUTHENTICATE, REGISTER_FAIL, CLEAR_ERRORS, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
 import setAuthToken from "../../utils/setAuthToken";
 import axios from 'axios'
+
+// Authenticate
+export const authenticate = () => dispatch => {
+    dispatch({
+      type: AUTHENTICATE
+    });
+};
 
 // Register User
 // TODO find a way to utilize https connections instead of http
@@ -25,8 +32,9 @@ export const register = formData => async dispatch => {
 };
 // Login User
 export const login = formData => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (sessionStorage.token) {
+    authenticate()
+    setAuthToken(sessionStorage.token);
   }
   const config = {
     headers: {
