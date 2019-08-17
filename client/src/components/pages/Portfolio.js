@@ -12,9 +12,9 @@ const Portfolio = ({
 }) => {
   const [tweak, setTweak] = useState(false);
   if (loading || stocks === null) {
-    return (<div />);
+    return <div />;
   } else {
-    const value = stocks.reduce((a, b) => {
+    let  value = stocks.reduce((a, b) => {
       return a + b.price["price"];
     }, 0);
     return (
@@ -24,7 +24,9 @@ const Portfolio = ({
             <h1 className="card-title text-primary text-center m-1">
               {current.name}
             </h1>
-            <h1 className="card-text text-primary text-center m-1">{value}</h1>
+            <h1 className="card-text text-primary text-center m-1">
+              {"$"} {value}
+            </h1>
           </div>
           <button
             onClick={() => setTweak(!tweak)}
@@ -33,8 +35,8 @@ const Portfolio = ({
             Add Stock
           </button>
         </div>
-        {tweak ? <StockForm /> : <Stocks />}
-      </div>
+          {tweak ? <StockForm /> : <Stocks />}
+        </div>
     );
   }
 };

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
-const { connectDB, disconnectDB } = require('./config/db')
+const { connectDB } = require('./config/db')
 const path = require('path')
 const passport = require('passport')
 const session = require('express-session')
@@ -17,8 +17,8 @@ var sess = {
     saveUninitialized: true,
     resave:true,
     name:'sessionsBruh',
-    cookie:{
-        secure:false
+    cookie: {
+        secure: true
     }
 }
 

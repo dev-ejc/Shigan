@@ -41,7 +41,7 @@ const Login = ({history, setAlert,login,clearErrors, auths:{error,isAuthenticate
         <div className="form-container mt-2">
             <form className="form p-2" onSubmit={onSubmit}>
             <h1 className="form-title">
-                Account <span className="text-primary">Login</span>
+                Account <span className="text-primary text-center">Login</span>
             </h1>
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>
