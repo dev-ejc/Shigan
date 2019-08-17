@@ -60,7 +60,7 @@ const onSubmit = e => {
                   </form>
             ) : (
               <Fragment>
-              <table className="table table-bordered">
+              <table className="table table-bordered table-responsive">
               <tbody>
                 <tr key={"name"}>
                   <td className="text-right">Name</td>
