@@ -1,21 +1,12 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_ERRORS, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
+import { REGISTER_SUCCESS, AUTHENTICATE, REGISTER_FAIL, CLEAR_ERRORS, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types'
 import setAuthToken from "../../utils/setAuthToken";
 import axios from 'axios'
 
-// Load User
-//@TODO switch localStorage to localStorage
-export const loadUser = () => async dispatch => {
-  try {
-    const res = await axios.get("/api/auth");
+// Authenticate
+export const authenticate = () => dispatch => {
     dispatch({
-      type: USER_LOADED,
-      payload: res.data
+      type: AUTHENTICATE
     });
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    });
-  }
 };
 
 // Register User
@@ -32,7 +23,6 @@ export const register = formData => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    await loadUser();
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
@@ -42,8 +32,9 @@ export const register = formData => async dispatch => {
 };
 // Login User
 export const login = formData => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (sessionStorage.token) {
+    authenticate()
+    setAuthToken(sessionStorage.token);
   }
   const config = {
     headers: {
@@ -56,7 +47,6 @@ export const login = formData => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-    await loadUser();
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
