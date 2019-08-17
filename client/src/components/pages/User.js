@@ -4,6 +4,7 @@ import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
 import { getStocks } from "../../state/stocks/stocksAction";
 import PropTypes from "prop-types"
+import StockVisuals from "../stocks/StockVisuals";
 
 const User = ({getStocks}) => {
   const [tweak, setTweak] = useState(false);
@@ -23,6 +24,7 @@ const User = ({getStocks}) => {
     <div className="container mt-2">
       <div className="row">
           <div className="col">
+            <StockVisuals />
             <button onClick={toggle}className="button btn-primary btn-block mb-2">Purchase Stock</button>
             {tweak ? <StockForm /> : <Stocks />}
           </div>
