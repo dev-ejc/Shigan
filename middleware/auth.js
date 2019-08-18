@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const jwtSecret= config.get('jwtSecret')
+
 module.exports = function(req,res,next) {
     try {
         // Get token from header
@@ -10,9 +11,11 @@ module.exports = function(req,res,next) {
         return res.status(401).json({ msg: 'No token, authorization denied'})
         }
         const decoded = jwt.verify(token, jwtSecret)
+        console.log(decoded.user)
         req.user = decoded.user
         next()
     } catch (err) {
+        console.log(err.message)
         res.status(401).json( {msg: 'Invalid Token'})
     }
 }

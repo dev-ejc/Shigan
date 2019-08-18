@@ -51,6 +51,7 @@ router.post(
           res.json({ token });
         }
       );
+      console.log('completed login')
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
