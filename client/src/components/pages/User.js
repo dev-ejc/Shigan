@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
 import { getStocks } from "../../state/stocks/stocksAction";
+import { login } from "../../state/auths/authsAction";
 import PropTypes from "prop-types"
 import StockVisuals from "../stocks/StockVisuals";
 
-const User = ({getStocks, stocks:{loading,stocks}}) => {
+const User = ({ getStocks, stocks:{loading,stocks}}) => {
   const [tweak, setTweak] = useState(false);
 
   const toggle = () => {
@@ -15,12 +16,16 @@ const User = ({getStocks, stocks:{loading,stocks}}) => {
 
   useEffect(
     () => {
-      getStocks();
+      if (!isAuthenticated) {
+        login()
+      } else {
+        getStocks();
+    }
     }, //eslint-disable-next-line
     []
   );
 
-  if (loading || stocks === null) {
+  if (user === null || loading || stocks === null) {
     return (<div className="d-flex justify-content-center">
     <div className="spinner-border text-primary" role="status">
       <span className="sr-only">Loading...</span>
