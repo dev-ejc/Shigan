@@ -16,11 +16,8 @@ const User = ({ getStocks, stocks:{loading,stocks}}) => {
 
   useEffect(
     () => {
-      if (!isAuthenticated) {
-        login()
-      } else {
+      
         getStocks();
-    }
     }, //eslint-disable-next-line
     []
   );
