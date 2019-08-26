@@ -1,4 +1,6 @@
 import {
+  SET_INFO,
+  SET_UPDATE,
   ADD_STOCK,
   DELETE_STOCK,
   GET_STOCKS,
@@ -110,6 +112,19 @@ export const clearFilter = () => dispatch => {
 export const setLoading = () => dispatch => {
   dispatch({
     type: SET_LOADING
+  });
+};
+
+// Set Loading
+export const setInfo = () => dispatch => {
+  dispatch({
+    type: SET_INFO
+  });
+};
+// Set Loading
+export const setUpdate= () => dispatch => {
+  dispatch({
+    type: SET_UPDATE
   });
 };
 

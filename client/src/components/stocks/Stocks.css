@@ -1,0 +1,5 @@
+@media(min-width:997) {
+    card-columns {
+        grid-template-columns: "repeat(3,1fr)",
+    }
+}

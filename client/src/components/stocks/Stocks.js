@@ -1,5 +1,6 @@
 import React from 'react'
 import StockItem from './StockItem'
+import "./Stocks.css";
 import { getStocks } from '../../state/stocks/stocksAction'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -12,14 +13,19 @@ const Stocks = ({stocks:{stocks,loading}}) => {
        </div>)
     } else {
         return (
-            <div className='container'>
+            <div className='card-columns' style={style}>
                      {data.map((stock) => (
-                         <div className="container" key={stock["stock"]._id}>
-                            <StockItem  stock={stock["stock"]} price={stock["price"]} />
-                        </div>
+                            <StockItem  key={stock["stock"]._id} stock={stock["stock"]} price={stock["price"]} />
                     ))}      
             </div>)
     }
+}
+
+const style = {
+    display: "grid",
+    gridGap: '1rem',
+    gridTemplateColumns: "repeat(1fr)",
+
 }
 
 Stocks.propTypes = {

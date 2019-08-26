@@ -6,6 +6,7 @@ const config = require('config')
 const jwtSecret = config.get('jwtSecret')
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
+
 // @route   POST api/users
 // @desc    Register a user
 // @access  Public

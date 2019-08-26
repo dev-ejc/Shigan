@@ -1,6 +1,7 @@
-import  { ADD_STOCK, DELETE_STOCK, GET_STOCKS, CLEAR_STOCKS, SET_CURRENT_STOCK, CLEAR_CURRENT_STOCK, UPDATE_CURRENT_STOCK, FILTER_STOCKS, CLEAR_FILTER, SET_LOADING, STOCK_ERROR } from './types'
+import  { SET_UPDATE, SET_INFO, ADD_STOCK, DELETE_STOCK, GET_STOCKS, CLEAR_STOCKS, SET_CURRENT_STOCK, CLEAR_CURRENT_STOCK, UPDATE_CURRENT_STOCK, FILTER_STOCKS, CLEAR_FILTER, SET_LOADING, STOCK_ERROR } from './types'
 
 const initialState = {
+    update: false,
     stocks: null,
     current: null,
     filtered: null,
@@ -10,6 +11,16 @@ const initialState = {
 
 export default (state = initialState,action) => {
     switch (action.type) {
+        case SET_INFO:
+            return {
+                ...state,
+                update: false
+            }
+        case SET_UPDATE:
+            return {
+                ...state,
+                update: true
+            }
         case GET_STOCKS:
             return {
                 ...state,
