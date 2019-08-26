@@ -37,7 +37,7 @@ const onSubmit = e => {
 
   return (
     <div className="card bg-secondary mt-1">
-      <div className="card-body align-content-center">
+      <div className="card-body justify-content-center align-content-center">
         <h3 className="card-title text-dark text-center">{stock.ticker}</h3>
             <img src={image} className="card-img-top mx-auto"alt="logo" />
             {tweak ? (

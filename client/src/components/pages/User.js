@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from 'react-redux'
 import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
-import { getStocks } from "../../state/stocks/stocksAction";
+import { getStocks,setInfo, setUpdate } from "../../state/stocks/stocksAction";
 import PropTypes from "prop-types"
 import StockVisuals from "../stocks/StockVisuals";
 
-const User = ({ getStocks, stocks:{loading,stocks}}) => {
-  const [tweak, setTweak] = useState(false);
-
-  const toggle = () => {
-    setTweak(!tweak);
-  }
-
+const User = ({getStocks, setInfo, setUpdate, stocks:{update, loading,stocks}}) => {
   useEffect(
     () => {
       
@@ -21,6 +15,13 @@ const User = ({ getStocks, stocks:{loading,stocks}}) => {
     []
   );
 
+  const toggle = () => {
+    if(update) {
+      setInfo()
+    } else {
+      setUpdate()
+    }
+  }
   if (loading || stocks === null) {
     return (<div className="d-flex justify-content-center">
     <div className="spinner-border text-primary" role="status">
@@ -34,7 +35,7 @@ const User = ({ getStocks, stocks:{loading,stocks}}) => {
           <div className="col">
             <StockVisuals />
             <button onClick={toggle}className="button btn-primary btn-block mb-2">Purchase Stock</button>
-            {tweak ? <StockForm /> : <Stocks />}
+            {update? <StockForm /> : <Stocks />}
           </div>
         </div>
     </div>
@@ -49,4 +50,4 @@ const mapStateToProps = state =>({
   stocks:state.stocks
 })
 
-export default connect(mapStateToProps, {getStocks})(User);
+export default connect(mapStateToProps, {getStocks, setUpdate, setInfo})(User);

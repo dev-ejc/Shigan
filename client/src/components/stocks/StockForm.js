@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { addStock } from "../../state/stocks/stocksAction";
+import { addStock, setInfo } from "../../state/stocks/stocksAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const StockForm = ({addStock}) => {
+const StockForm = ({addStock, setInfo}) => {
   const [stock, setStock] = useState({
     ticker: "",
     shares: 0,
@@ -15,6 +15,7 @@ const StockForm = ({addStock}) => {
   const onSubmit = e => {
     e.preventDefault();
     addStock(stock);
+    setInfo();
     setStock({
       ticker: "",
       shares: 0,
@@ -64,5 +65,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addStock }
+  { addStock, setInfo }
 )(StockForm);
