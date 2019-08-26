@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
-const StockVisuals = ({stocks:{stocks,loading}}) => {
+import { VictoryChart, VictoryLine, VictoryAxis } from 'victory'
+const StockVisuals = ({data,stocks:{stocks,loading}}) => {
     if(stocks === null || loading) {
         return (
             <div className="spinner-border" role="status">
@@ -13,7 +13,20 @@ const StockVisuals = ({stocks:{stocks,loading}}) => {
         const value = stocks.reduce((a,b) => {
             return a + (b.stock.shares * b.price.price)
         },0)
-        return(<h1 className="text-primary text-center mb-2">{`$${Math.round(100 * value)/100}`}</h1>)
+        return (
+            <div className="container">
+            <VictoryChart>
+            <VictoryAxis dependentAxis
+            fixLabelOverlap={true}/> 
+            <VictoryLine
+              data={data}
+              scale={{x:"time",y:"linear"}}
+              x="date"
+              y="close"
+            />
+            </VictoryChart>
+            <h1 className="text-primary text-center mb-2">{`$${Math.round(100 * value)/100}`}</h1>
+            </div>)
     }
 }
 

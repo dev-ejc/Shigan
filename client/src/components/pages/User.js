@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux'
 import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
-import { getStocks,setInfo, setUpdate } from "../../state/stocks/stocksAction";
+import { getHistorical, getStocks,setInfo, setUpdate } from "../../state/stocks/stocksAction";
 import PropTypes from "prop-types"
 import StockVisuals from "../stocks/StockVisuals";
 
-const User = ({getStocks, setInfo, setUpdate, stocks:{update, loading,stocks}}) => {
+const User = ({getHistorical, getStocks, setInfo, setUpdate, stocks:{historical, update, loading,stocks}}) => {
   useEffect(
     () => {
       
         getStocks();
+        getHistorical();
     }, //eslint-disable-next-line
     []
   );
@@ -33,7 +34,7 @@ const User = ({getStocks, setInfo, setUpdate, stocks:{update, loading,stocks}}) 
     <div className="container mt-2">
       <div className="row">
           <div className="col">
-            <StockVisuals />
+            <StockVisuals data={historical}/>
             <button onClick={toggle}className="button btn-primary btn-block mb-2">Purchase Stock</button>
             {update? <StockForm /> : <Stocks />}
           </div>
@@ -50,4 +51,4 @@ const mapStateToProps = state =>({
   stocks:state.stocks
 })
 
-export default connect(mapStateToProps, {getStocks, setUpdate, setInfo})(User);
+export default connect(mapStateToProps, {getStocks, setUpdate, getHistorical, setInfo})(User);

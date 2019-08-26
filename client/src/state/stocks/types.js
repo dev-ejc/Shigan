@@ -3,6 +3,7 @@ export const DELETE_STOCK = 'DELETE_STOCK'
 export const GET_STOCKS = 'GET_STOCKS'
 export const SET_UPDATE = 'SET_UPDATE'
 export const SET_INFO = 'SET_INFO'
+export const GET_HISTORICAL = "GET_HISTORICAL"
 export const CLEAR_STOCKS = 'CLEAR_STOCKS'
 export const SET_CURRENT_STOCK = 'SET_CURRENT_STOCK'
 export const STOCK_ERROR = 'STOCK_ERROR'

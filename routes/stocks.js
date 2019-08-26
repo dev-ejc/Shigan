@@ -41,6 +41,36 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+router.get("/historical-price", auth, async (req, res) => {
+  try {
+    const stocks = await Stock.find({ user: req.user.id }).sort({
+      date: -1
+    });
+    let promises = stocks.map(stock => {
+      return axios
+       .get(`https://financialmodelingprep.com/api/v3/historical-price-full/${stock.ticker}?serietype=line`)
+        .then(price => {
+          let historicals = price.data["historical"]
+          historicals.forEach(h => {
+            h.close = h.close * stock.shares
+          })
+          let data = historicals
+          return data;
+        });
+    });
+    Promise.all(promises).then(result => {
+      let package = result.reduce((a,b) => {
+        a.forEach((item,index) => {
+          item = a[index]["close"] + b[index]["close"]
+      })
+    return a},result[0])
+      res.send(package);
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // @route   POST api/stocks
 // @desc    Add new stock
@@ -81,13 +111,13 @@ router.post(
 // @route   POST api/stocks
 // @desc    Update portfolio stocks
 // @access  Private
-router.put("/:id", auth, async (req, res) => {
+router.put("/", auth, async (req, res) => {
   console.log('Hit update stock route')
   const { shares } = req.body;
   const stockFields = {};
   if (shares) stockFields.shares = shares;
   try {
-    let stock = await Stock.findById(req.params.id);
+    let stock = await Stock.findById(req.user._id);
     if (!stock) {
       return res.status(404).json({ msg: "Stock does not exist" });
     }

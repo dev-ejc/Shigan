@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
-const db = process.env.MONGOURI
-
 const connectDB = async () => {
     try {
-        await mongoose.connect(db, {
+        await mongoose.connect(process.env.MONGOURI, {
         useNewUrlParser: true,
          useCreateIndex: true,
          useFindAndModify:false}
