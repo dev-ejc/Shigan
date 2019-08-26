@@ -11,7 +11,8 @@ import {
   FILTER_STOCKS,
   CLEAR_FILTER,
   SET_LOADING,
-  STOCK_ERROR
+  STOCK_ERROR,
+  GET_HISTORICAL
 } from "./types";
 import axios from "axios";
 
@@ -22,6 +23,20 @@ export const getStocks = () => async dispatch => {
     const res = await axios.get("/api/stocks");
     dispatch({
       type: GET_STOCKS,
+      payload: res.data
+    });
+  } catch (err) {
+    stockError(err);
+  }
+};
+
+// @todo abstract api requests
+export const getHistorical= () => async dispatch => {
+  try {
+    setLoading();
+    const res = await axios.get("/api/stocks/historical-price");
+    dispatch({
+      type: GET_HISTORICAL,
       payload: res.data
     });
   } catch (err) {

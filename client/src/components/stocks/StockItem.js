@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
-import { setCurrentStock, deleteStock, updateCurrentStock } from "../../state/stocks/stocksAction";
+import { setCurrentStock, deleteStock, updateCurrentStock, getHistorical } from "../../state/stocks/stocksAction";
 import { connect } from "react-redux";
 
-const StockItem = ({ price, stock, deleteStock, updateCurrentStock }) => {
+const StockItem = ({ price, stock, deleteStock, updateCurrentStock, getHistorical }) => {
   const [tweak, setTweak] = useState(false);
   const toggle = () => {
     setTweak(!tweak);
@@ -27,12 +27,14 @@ const onChange = e => {
 
 const onDelete = () => {
   deleteStock(_id);
+  getHistorical()
 };
 
 const onSubmit = e => {
   e.preventDefault();
   setTweak(false)
   updateCurrentStock(stateStock);
+  getHistorical()
 };
 
   return (
@@ -98,5 +100,5 @@ const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { setCurrentStock, deleteStock, updateCurrentStock }
+  { setCurrentStock, deleteStock, updateCurrentStock, getHistorical }
 )(StockItem);
