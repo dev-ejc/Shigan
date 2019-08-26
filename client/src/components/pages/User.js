@@ -7,10 +7,10 @@ import PropTypes from "prop-types"
 import StockVisuals from "../stocks/StockVisuals";
 
 const User = ({getStocks, setInfo, setUpdate, stocks:{update, loading,stocks}}) => {
-
   useEffect(
     () => {
-      getStocks();
+      
+        getStocks();
     }, //eslint-disable-next-line
     []
   );

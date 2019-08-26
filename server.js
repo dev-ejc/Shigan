@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 5000
-const { connectDB, disconnectDB } = require('./config/db')
+const { connectDB } = require('./config/db')
 const path = require('path')
 const helmet = require('helmet')
 const dotenv = require('dotenv')
@@ -28,11 +28,6 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => {
-    console.log(`Server Started on ${PORT}`)
+    console.log(`Server Started`)
     connectDB()
-    setTimeout(() => {
-        disconnectDB().then(() => {
-            console.log('DC DB')
-        })
-    },60000)
 })
