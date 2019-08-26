@@ -13,7 +13,7 @@ const StockVisuals = ({stocks:{stocks,loading}}) => {
         const value = stocks.reduce((a,b) => {
             return a + (b.stock.shares * b.price.price)
         },0)
-        return(<h1 className="text-primary text-center mb-2">{`$${value}`}</h1>)
+        return(<h1 className="text-primary text-center mb-2">{`$${Math.round(100 * value)/100}`}</h1>)
     }
 }
 
