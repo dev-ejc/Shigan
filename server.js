@@ -4,10 +4,6 @@ const PORT = process.env.PORT || 5000
 const { connectDB } = require('./config/db')
 const path = require('path')
 const helmet = require('helmet')
-const dotenv = require('dotenv')
-
-// Load env
-dotenv.config({path:'./.env'})
 
 // Helmet Middleware
 app.use(helmet())
