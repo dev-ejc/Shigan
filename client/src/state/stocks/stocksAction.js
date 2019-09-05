@@ -52,6 +52,12 @@ export const searchKeyword = keyword => async dispatch => {
   }
 };
 
+export const clearSearch = () => {
+  dispatch({
+    type:CLEAR_SEARCH
+  })
+}
+
 // @todo abstract api requests
 export const getHistorical= () => async dispatch => {
   try {
