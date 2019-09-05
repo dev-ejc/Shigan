@@ -42,7 +42,7 @@ export const searchKeyword = keyword => async dispatch => {
         keyword
       }
     }
-    const res = await axios.get("/api/stocks",config);
+    const res = await axios.get(`/api/stocks/keyword/${keyword}`);
     dispatch({
       type: SEARCH_KEYWORD,
       payload: res.data
@@ -52,7 +52,7 @@ export const searchKeyword = keyword => async dispatch => {
   }
 };
 
-export const clearSearch = () => {
+export const clearSearch = () => dispatch => {
   dispatch({
     type:CLEAR_SEARCH
   })
