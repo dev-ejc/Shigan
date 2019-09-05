@@ -1,9 +1,10 @@
-import  { GET_HISTORICAL, SET_UPDATE, SET_INFO, ADD_STOCK, DELETE_STOCK, GET_STOCKS, CLEAR_STOCKS, SET_CURRENT_STOCK, CLEAR_CURRENT_STOCK, UPDATE_CURRENT_STOCK, FILTER_STOCKS, CLEAR_FILTER, SET_LOADING, STOCK_ERROR } from './types'
+import  { SEARCH_KEYWORD, CLEAR_SEARCH, GET_HISTORICAL, SET_UPDATE, SET_INFO, ADD_STOCK, DELETE_STOCK, GET_STOCKS, CLEAR_STOCKS, SET_CURRENT_STOCK, CLEAR_CURRENT_STOCK, UPDATE_CURRENT_STOCK, FILTER_STOCKS, CLEAR_FILTER, SET_LOADING, STOCK_ERROR } from './types'
 
 const initialState = {
     update: false,
     stocks: null,
     current: null,
+    results: [],
     filtered: null,
     error: null,
     historical:[],
@@ -17,6 +18,17 @@ export default (state = initialState,action) => {
                 ...state,
                 update: false
             }
+        case SEARCH_KEYWORD:
+            return {
+                ...state,
+                results: action.payload,
+                loading:false
+            }
+        case CLEAR_SEARCH:
+                return {
+                    ...state,
+                    results: []
+                }
         case SET_UPDATE:
             return {
                 ...state,
