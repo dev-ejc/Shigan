@@ -8,7 +8,7 @@ const SearchItem = ({ item }) => {
                     </div>
             <div className="card-body">
                 <h3 className="card-text"><span className="badge badge-info">{item["1. symbol"]}</span></h3>
-                <button className="btn btn-primary">Add Stock</button>
+                <button className="btn btn-primary">+</button>
             </div>
         </div>
     )

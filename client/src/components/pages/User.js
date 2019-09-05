@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from 'react-redux'
 import Stocks from '../stocks/Stocks'
 import StockForm from '../stocks/StockForm'
+import Search from '../stocks/Search'
 import { getHistorical, getStocks,setInfo, setUpdate } from "../../state/stocks/stocksAction";
 import PropTypes from "prop-types"
 import StockVisuals from "../stocks/StockVisuals";
@@ -36,7 +37,7 @@ const User = ({getHistorical, getStocks, setInfo, setUpdate, stocks:{historical,
           <div className="col">
             <StockVisuals data={historical}/>
             <button onClick={toggle}className="button btn-primary btn-block mb-2">Purchase Stock</button>
-            {update? <StockForm /> : <Stocks />}
+            {update? <Search /> : <Stocks />}
           </div>
         </div>
     </div>
