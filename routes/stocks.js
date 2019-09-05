@@ -41,6 +41,25 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+router.get("/keyword/:keyword", async (req, res) => {
+  try {
+    let results = await axios(
+      "https://www.alphavantage.co/query",
+      {
+        params: {
+          "function": "SYMBOL_SEARCH",
+          "keywords": req.params.keyword,
+          "apikey": process.env.ALPHAVANTAGE_KEY
+        }
+      })
+    res.json(results.data["bestMatches"]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 router.get("/historical-price", auth, async (req, res) => {
   try {
     const stocks = await Stock.find({ user: req.user.id }).sort({
