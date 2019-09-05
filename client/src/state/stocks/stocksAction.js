@@ -12,7 +12,9 @@ import {
   CLEAR_FILTER,
   SET_LOADING,
   STOCK_ERROR,
-  GET_HISTORICAL
+  GET_HISTORICAL,
+  SEARCH_KEYWORD,
+  CLEAR_SEARCH
 } from "./types";
 import axios from "axios";
 
@@ -23,6 +25,26 @@ export const getStocks = () => async dispatch => {
     const res = await axios.get("/api/stocks");
     dispatch({
       type: GET_STOCKS,
+      payload: res.data
+    });
+  } catch (err) {
+    stockError(err);
+  }
+};
+
+
+// @todo abstract api requests
+export const searchKeyword = keyword => async dispatch => {
+  try {
+    setLoading();
+    const config = {
+      params: {
+        keyword
+      }
+    }
+    const res = await axios.get("/api/stocks",config);
+    dispatch({
+      type: SEARCH_KEYWORD,
       payload: res.data
     });
   } catch (err) {
